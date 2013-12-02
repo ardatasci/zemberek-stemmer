@@ -1,10 +1,6 @@
 import java.net.*;
 import java.io.*;
 
-import java.io.IOException;
-
-
-
 import org.json.*;
 
 
@@ -13,44 +9,53 @@ public class Main {
 
 
 	public static void main(String[] args) throws JSONException {
-		NamedEntitiyRecognition ner = new NamedEntitiyRecognition();
-		SemanticEnhancement se = new SemanticEnhancement();
-		ProgramProfiler pp = new ProgramProfiler();
-		// TODO Auto-generated method stub
-		/*String metin = "BELGESEL PROGRAM, HÂLEN GİZEMİNİ KORUYAN İMPARATOR PENGUENLERİN YAŞAMLARINI VE TÜRLERİNİN DEVAMI İÇİN VERDİKLERİ MÜCADELEYİ EKRANA GETİRİYOR. YERYÜZÜNÜN EN ISSIZ VE ACIMASIZ";
-		System.out.println(metin.toLowerCase());
-		List<YaziBirimi> analizDizisi = YaziIsleyici.analizDizisiOlustur(metin);
-		Zemberek zemberek = new Zemberek(new TurkiyeTurkcesi());*/
-		/*
-		for (int i = 0; i < analizDizisi.size(); i++) {
-	        if (analizDizisi.get(i).tip == YaziBirimiTipi.KELIME) {
-	            
-	            Kelime[] k = zemberek.kelimeCozumle(analizDizisi.get(i).icerik);
-	            for (int t=0 ; t < k.length; t++)
-	            {
-	            	System.out.println(k[t].kok().tip());
-	            	System.out.println(k[t].kok().icerik());
-	            }
-	        }
-	    }*/
+		
+		
 		
 		try {
-			JSONObject program = getProgramInfo("atv", "1376347236");
-			String desc = ((JSONObject)program.get("broadcast")).getString("sDesc");
+			ProgramProfiler profiler = new ProgramProfiler();
+			ProgramProfile pp = new ProgramProfile();
+			JSONObject program;
 			
-			se.IMDBEnhancement(((JSONObject)program.get("broadcast")).getString("pName"));
-			desc += " ";
-			desc += ((JSONObject)program.get("broadcast")).getString("pName");
-			desc += " ";
-			desc += ((JSONObject)program.get("broadcast")).getString("pGenreStr");
-			System.out.println(desc);
+			// New Class for Program
+			String channel = "show_tv";
+			int start = 1378671000;
+			for(int i = 0; i < 30; i++) {
+			program = getProgramInfo(channel, Integer.toString(start));
+			pp.setPID(((JSONObject)program.get("broadcast")).getString("program_id"));
+			pp.setTimeOfDay(((JSONObject)program.get("broadcast")).getInt("pStart"));
+			pp.setTitle(((JSONObject)program.get("broadcast")).getString("pName"));
+			pp.setGenre(((JSONObject)program.get("broadcast")).getString("pGenreStr"));
+			pp.setTimeOfDay((((JSONObject)program.get("broadcast")).getInt("pStart")));
+			pp.setChannel(channel);
+			//System.out.println(profiler.dropStopWords(((JSONObject)program.get("broadcast")).getString("sDesc")).toString());
+			pp.setBagOfWords(profiler.getNounsFromDesc(profiler.dropStopWords(((JSONObject)program.get("broadcast")).getString("sDesc")).toString()));
+			pp.saveProfile();
+			start = start - 86400;
+			}
 			
-			pp.printProfile("atv", "1234", ner.dbPedia(desc));
+			
+			
+			//String desc = ((JSONObject)program.get("broadcast")).getString("sDesc");
+			//System.out.println(((JSONObject)program.get("broadcast")));*/
+		
+		
+			
+			
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 
+		
+		
+		
+		
+
+		
 		
 	}
 	
@@ -59,6 +64,7 @@ public class Main {
 	
 	// to get program info from our epg source
 	public static JSONObject getProgramInfo(String channel_name, String time) throws IOException, JSONException {
+		System.out.println("Getting Program info of channel : " + channel_name + " at " + time);
 		URL epgSource;
 		HttpURLConnection epgSource_connection;
 		epgSource = new URL("http://10.155.10.14/program_detail.json");
@@ -82,6 +88,9 @@ public class Main {
                                 		epgSource_connection.getInputStream()));
         JSONObject jsonObj = new JSONObject( in.readLine()); 
         in.close();
+        
+        System.out.println("Program description is " + ((JSONObject)jsonObj.get("broadcast")).getString("sDesc"));
+        
         return jsonObj;	
 	}
 	
