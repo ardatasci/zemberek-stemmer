@@ -1,4 +1,4 @@
-package KeywordAugmentation.Freebase;
+package KeywordAugmentation.Freebase.SearchAPI;
 
 
 import java.io.FileInputStream;
@@ -24,13 +24,13 @@ import com.jayway.jsonpath.JsonPath;
 
 
 
-public class FreebaseRequest {
+public class FreebaseSearchRequest {
 
 	  public static Properties properties = new Properties();
 	  public HttpTransport httpTransport = new NetHttpTransport();
 	  public HttpRequestFactory requestFactory;
 	  JSONParser parser = new JSONParser();
-	  GenericUrl url = new GenericUrl("https://www.googleapis.com/freebase/v1/mqlread");
+	  GenericUrl url = new GenericUrl("https://www.googleapis.com/freebase/v1/search");
 	
 	  public void generateInstance() throws FileNotFoundException, IOException
 	  {
@@ -44,8 +44,10 @@ public class FreebaseRequest {
 	  public JSONArray executeQuery(String query) throws IOException, ParseException
 	  {
 	    url.put("query", query);
+	    url.put("output","(type)");
+	    url.put("lang", "tr");
 	    url.put("key", properties.get("API_KEY"));
-	    
+	    System.out.println(url);
 	    HttpRequest request = requestFactory.buildGetRequest(url);
 	    HttpResponse httpResponse = request.execute();
 	    JSONObject response = (JSONObject)parser.parse(httpResponse.parseAsString());

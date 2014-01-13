@@ -1,5 +1,4 @@
-package KeywordAugmentation.Freebase;
-
+package KeywordAugmentation.Freebase.MQLAPI;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,30 +10,15 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
-
-
-
-public class FreebaseTVProgramRequest extends FreebaseRequest{
-	 
+public class FreebaseFilmRequest extends FreebaseMQLRequest{
+	
 	String queryType;
 	
 	public String findDirector(String filmName) throws IOException, ParseException
 	  {
 	    
-	    String ret;
-	    List<String> newList = new ArrayList<String>();
-	    
-	      String query = "[{" +
-	          "\"name\":\"" + filmName + "\"," +
-	          "\"" + queryType+ "/directed_by\": [{" +
-	          "\"name\": []}]"+
-	          "}]";
-	      System.out.println(query);
-	      JSONArray result = executeQuery(query);
-	      newList.addAll(parseResults(result,"$./film/film/directed_by"));
-	      
-	    ret = newList.toString();
-	    return removeUnnecessaryChars(ret);
+	    String ret= "";
+	    return ret;
 	  }
 
 	  public Vector<String> findActors(String programName) throws IOException, ParseException, JSONException
@@ -83,6 +67,5 @@ public class FreebaseTVProgramRequest extends FreebaseRequest{
 			ret = newList.toString();
 			return removeUnnecessaryChars(ret);*/
 			return actors;
-	    
 	  }
 }
