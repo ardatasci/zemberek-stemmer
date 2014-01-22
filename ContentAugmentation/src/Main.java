@@ -21,6 +21,9 @@ public class Main {
 		DBPediaSpotlight dbPediaSpotlight = new DBPediaSpotlight();
 		Vector<AnnotatedKeyword> spottedKeywords = new Vector<>();
 		spottedKeywords = dbPediaSpotlight.getAnnotatedProperNames(text);
+		//DBPediaSpotlight dbPediaSpotlight = new DBPediaSpotlight();
+		//Vector<AnnotatedKeyword> spottedKeywords = new Vector<>();
+		//spottedKeywords = dbPediaSpotlight.getAnnotatedProperNames(text);
 		//dbPediaSpotlight.getTypeOfKeyword("DBpedia:Agent,Schema:Organization,DBpedia:Organisation,DBpedia:Broadcaster,Schema:TelevisionStation,DBpedia:TelevisionStation");
 		//for (AnnotatedKeyword annotatedKeyword : spottedKeywords) {
 		//	annotatedKeyword.printAnnotatedKeyword();

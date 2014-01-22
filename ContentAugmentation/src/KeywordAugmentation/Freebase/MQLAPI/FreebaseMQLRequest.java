@@ -3,6 +3,13 @@ package KeywordAugmentation.Freebase.MQLAPI;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -12,16 +19,13 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpResponse;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
-
-
-
+import com.jayway.jsonpath.JsonPath;
 
 
 
@@ -49,7 +53,7 @@ public class FreebaseMQLRequest {
 	    
 	    HttpRequest request = requestFactory.buildGetRequest(url);
 	    HttpResponse httpResponse = request.execute();
-	    JSONObject response = (JSONObject) parser.parse(httpResponse.parseAsString());
+	    JSONObject response = (JSONObject)parser.parse(httpResponse.parseAsString());
 	    JSONArray results = (JSONArray)response.get("result");
 	    if(results != null)
 	      return results;
