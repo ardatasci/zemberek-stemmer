@@ -7,7 +7,7 @@ import java.util.Vector;
 import org.json.JSONException;
 import org.json.simple.parser.ParseException;
 
-import KeywordAugmentation.Freebase.FreebaseTVProgramRequest;
+import KeywordAugmentation.Freebase.MQLAPI.FreebaseTVProgramRequest;
 import KeywordExtraction.AnnotatedKeyword;
 import KeywordExtraction.DBPediaSpotlight;
 
@@ -134,7 +134,7 @@ public class ProgramInfo {
 			name = (String) name.subSequence(0, pos);
 		System.out.println(name);
 		System.out.println(name.toLowerCase());
-		actors = programRequest.findActors(name.toLowerCase());
+		actors = programRequest.findActorsbyName(name.toLowerCase());
 	}
 	
 	public void printProgramInfoToFile(FileWriter file) throws IOException
