@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 import org.joda.time.DateTime;
 
-import stemmer.TimeOfDay;
 import KeywordExtraction.AnnotatedKeyword;
+
+import stemmer.TimeOfDay;
 
 public class Program implements Comparable<Program>{
 	private String name;

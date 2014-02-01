@@ -24,21 +24,25 @@ public class DBPediaSpotlight {
 	{
 		String spottedKeyword = null;
 		Vector<String> spottedKeywords = new Vector<>();
-		String response = annotationRequest.spotlightSpotRequest(text);
-		//System.out.println(response);
-		JSONObject jsonObj = new JSONObject(response);
-		//System.out.println(jsonObj.getJSONObject("annotation"));
-		if(jsonObj.getJSONObject("annotation").has("surfaceForm"))
+		if(!text.isEmpty())
 		{
-			JSONArray arr = jsonObj.getJSONObject("annotation").getJSONArray("surfaceForm");
-			int length = arr.length();
-			for (int i = 0; i < length; i++)
+			String response = annotationRequest.spotlightSpotRequest(text);
+			//System.out.println(response);
+			JSONObject jsonObj = new JSONObject(response);
+			//System.out.println(jsonObj.getJSONObject("annotation"));
+			if(jsonObj.getJSONObject("annotation").has("surfaceForm"))
 			{
-			    spottedKeyword = arr.getJSONObject(i).getString("@name");
-			    //System.out.println(spottedKeyword);
-			    spottedKeywords.add(spottedKeyword);
+				JSONArray arr = jsonObj.getJSONObject("annotation").getJSONArray("surfaceForm");
+				int length = arr.length();
+				for (int i = 0; i < length; i++)
+				{
+				    spottedKeyword = arr.getJSONObject(i).getString("@name");
+				    //System.out.println(spottedKeyword);
+				    spottedKeywords.add(spottedKeyword);
+				}	
 			}	
 		}
+
 		
 
 		return spottedKeywords;
@@ -46,15 +50,18 @@ public class DBPediaSpotlight {
 	public Vector<AnnotatedKeyword> getAnnotatedProperNames(String text) throws Exception
 	{
 		Vector<AnnotatedKeyword> spottedKeywords = new Vector<>();
+		if(!text.isEmpty())
+		{
+			//for original text
+			this.addAnnotatedNamestoList(spottedKeywords, text);
+			//for uppercase text
+			//this.addAnnotatedNamestoList(spottedKeywords, text.toUpperCase());
+			//for lowercase text
+			//this.addAnnotatedNamestoList(spottedKeywords, text.toLowerCase());
+			//for only first letter uppercase text
+			//this.addAnnotatedNamestoList(spottedKeywords, WordUtils.capitalize(text.toLowerCase()));
+		}
 		
-		//for original text
-		this.addAnnotatedNamestoList(spottedKeywords, text);
-		//for uppercase text
-		this.addAnnotatedNamestoList(spottedKeywords, text.toUpperCase());
-		//for lowercase text
-		this.addAnnotatedNamestoList(spottedKeywords, text.toLowerCase());
-		//for only first letter uppercase text
-		this.addAnnotatedNamestoList(spottedKeywords, WordUtils.capitalize(text.toLowerCase()));
 
 		return spottedKeywords;
 	}

@@ -18,6 +18,7 @@ import org.jsoup.select.Elements;
 
 import KeywordExtraction.AnnotatedKeyword;
 import KeywordExtraction.DBPediaSpotlight;
+
 import stemmer.ProgramProfiler;
 
 
@@ -71,11 +72,12 @@ public class ChannelPageParser
 		program.setStemmedWords(wordArrayList);
 		
 		// get the annotated entities using dbpedia spotlight
-		//DBPediaSpotlight dbPediaSpotlight = new DBPediaSpotlight();
-		//Vector<AnnotatedKeyword> spottedKeywords = new Vector<>();
-		//spottedKeywords = dbPediaSpotlight.getAnnotatedProperNames(longDescription);
-		//ArrayList<AnnotatedKeyword> spottedKeywordsList = new ArrayList<AnnotatedKeyword>(spottedKeywords);
-		//program.setAnnotatedEntities(spottedKeywordsList);
+		DBPediaSpotlight dbPediaSpotlight = new DBPediaSpotlight();
+		Vector<AnnotatedKeyword> spottedKeywords = new Vector<>();
+		System.out.println("long:  " + longDescription);
+		spottedKeywords = dbPediaSpotlight.getAnnotatedProperNames(longDescription);
+		ArrayList<AnnotatedKeyword> spottedKeywordsList = new ArrayList<AnnotatedKeyword>(spottedKeywords);
+		program.setAnnotatedEntities(spottedKeywordsList);
 		Elements info_list = info_area.getElementsByTag("p") ;
 		for (Element inf :info_list)
 		{
@@ -191,9 +193,9 @@ public class ChannelPageParser
 				stemmedWords.addAll(p.getStemmedWords());
 				dailyPrograms.get(sameProgramIndex).setLongDescription(longDescription + " " + p.getLongDescription());
 				dailyPrograms.get(sameProgramIndex).setStemmedWords(stemmedWords);
-				//ArrayList<AnnotatedKeyword> annotatedEntities =  dailyPrograms.get(sameProgramIndex).getAnnotatedEntities();
-				//annotatedEntities.addAll(p.getAnnotatedEntities());
-				//dailyPrograms.get(sameProgramIndex).setAnnotatedEntities(annotatedEntities);
+				ArrayList<AnnotatedKeyword> annotatedEntities =  dailyPrograms.get(sameProgramIndex).getAnnotatedEntities();
+				annotatedEntities.addAll(p.getAnnotatedEntities());
+				dailyPrograms.get(sameProgramIndex).setAnnotatedEntities(annotatedEntities);
 			}
 		}
 		return dailyPrograms ;
