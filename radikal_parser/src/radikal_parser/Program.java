@@ -10,6 +10,7 @@ import stemmer.TimeOfDay;
 
 public class Program implements Comparable<Program>{
 	private String name;
+	private String channelName;
 	private String date;
 	private String startTimeStr;
 	private String endTimeStr;
@@ -17,6 +18,7 @@ public class Program implements Comparable<Program>{
 	private long startTime;
 	private long endTime;// IMPORTANT!! to be calculated during parsing
 	private ArrayList<String> genreList;
+	private String imageUrl; 
 	private String summary;
 	private String longDescription;
 	private ArrayList<String> directors;
@@ -32,6 +34,13 @@ public class Program implements Comparable<Program>{
 	}
 	public long getStartTime() {
 		return startTime;
+	}
+	
+	public String getChannelName() {
+		return channelName;
+	}
+	public void setChannelName(String channelName) {
+		this.channelName = channelName;
 	}
 	public void setStartTime(long startTime) {
 		this.startTime = startTime;
@@ -182,16 +191,26 @@ public class Program implements Comparable<Program>{
 	public void setTimeOfDay(ArrayList<TimeOfDay> timeOfDay) {
 		this.timeOfDay = timeOfDay;
 	}
+	
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 	@Override
 	public String toString() {
-		return "Program [name=" + name + ", date=" + date + ", startTimeStr="
-				+ startTimeStr + ", endTimeStr=" + endTimeStr + ", duration="
-				+ duration + ", startTime=" + startTime + ", endTime="
-				+ endTime + ", genreList=" + genreList + ", summary=" + summary
-				+ ", longDescription=" + longDescription + ", directors="
-				+ directors + ", actors=" + actors + ", stemmedWords="
-				+ stemmedWords + ", annotatedEntities=" + annotatedEntities
-				+ ", timeOfDay=" + timeOfDay + "]";
+		return "Program [name=" + name + ", channelName=" + channelName
+				+ ", date=" + date + ", startTimeStr=" + startTimeStr
+				+ ", endTimeStr=" + endTimeStr + ", duration=" + duration
+				+ ", startTime=" + startTime + ", endTime=" + endTime
+				+ ", genreList=" + genreList + ", imageUrl=" + imageUrl
+				+ ", summary=" + summary + ", longDescription="
+				+ longDescription + ", directors=" + directors + ", actors="
+				+ actors + ", stemmedWords=" + stemmedWords
+				+ ", annotatedEntities=" + annotatedEntities + ", timeOfDay="
+				+ timeOfDay + "]";
 	}
+	
 
 }
