@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="lib/json-path-0.5.3.jar"/>
 	<classpathentry kind="lib" path="lib/json-simple-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/java-json.jar"/>
+	<classpathentry kind="lib" path="/home/arcelik/Desktop/Master_Thesis/kaynak_kodu/zemberek-stemmer/ContentAugmentation/lib/minio-bin-0.9.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
