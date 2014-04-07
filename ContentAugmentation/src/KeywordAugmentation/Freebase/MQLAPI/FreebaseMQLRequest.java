@@ -72,15 +72,15 @@ public class FreebaseMQLRequest {
 		if(results.size() == 0)
 			return actors;
 		JSONObject result_obj = (JSONObject) results.get(0);
-		System.out.println(result_obj);
+		//System.out.println(result_obj);
 		JSONArray actorArray = (JSONArray) result_obj.get(parseType);
-		System.out.println("actor array");
-		System.out.println(actorArray);
+		//System.out.println("actor array");
+		//System.out.println(actorArray);
 		for(int i=0;i<actorArray.size();i++)
 		{
 			JSONObject actor = (JSONObject) actorArray.get(i);
 			JSONArray actorArrayInside = (JSONArray) actor.get(personType);	
-			System.out.println(actorArrayInside);
+			//System.out.println(actorArrayInside);
 			if(actorArrayInside.size() != 0)
 			{
 				String pure_actor = (String) actorArrayInside.get(0);

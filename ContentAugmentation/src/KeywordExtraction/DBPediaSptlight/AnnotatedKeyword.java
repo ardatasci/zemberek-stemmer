@@ -1,4 +1,4 @@
-package KeywordExtraction;
+package KeywordExtraction.DBPediaSptlight;
 
 import java.util.Vector;
 

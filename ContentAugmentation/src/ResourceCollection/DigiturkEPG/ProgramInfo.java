@@ -8,8 +8,8 @@ import org.json.JSONException;
 import org.json.simple.parser.ParseException;
 
 import KeywordAugmentation.Freebase.MQLAPI.FreebaseTVProgramRequest;
-import KeywordExtraction.AnnotatedKeyword;
-import KeywordExtraction.DBPediaSpotlight;
+import KeywordExtraction.DBPediaSptlight.AnnotatedKeyword;
+import KeywordExtraction.DBPediaSptlight.DBPediaSpotlight;
 
 
 public class ProgramInfo {

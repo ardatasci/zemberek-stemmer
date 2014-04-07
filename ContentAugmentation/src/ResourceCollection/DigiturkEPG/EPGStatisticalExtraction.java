@@ -8,7 +8,7 @@ import java.util.Vector;
 import org.json.JSONException;
 
 import KeywordAugmentation.Freebase.MQLAPI.FreebaseTVProgramRequest;
-import KeywordExtraction.AnnotatedKeyword;
+import KeywordExtraction.DBPediaSptlight.AnnotatedKeyword;
 
 public class EPGStatisticalExtraction {
 	Vector<String> annotatedKeywordTypes;

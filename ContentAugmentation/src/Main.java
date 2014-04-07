@@ -2,8 +2,10 @@ import java.util.Vector;
 
 import KeywordAugmentation.Freebase.MQLAPI.FreebaseTVProgramRequest;
 import KeywordAugmentation.Freebase.SearchAPI.FreebaseProgramSearchRequest;
-import KeywordExtraction.AnnotatedKeyword;
-import KeywordExtraction.DBPediaSpotlight;
+import KeywordExtraction.DBPediaSptlight.AnnotatedKeyword;
+import KeywordExtraction.DBPediaSptlight.DBPediaSpotlight;
+import KeywordExtraction.NamedEntityTurkish.ModifiedListCreator;
+import KeywordExtraction.NamedEntityTurkish.SentenceCreater;
 import ResourceCollection.DigiturkEPG.EPGStatisticalExtraction;
 
 
@@ -20,7 +22,7 @@ public class Main {
 		//String text = "Recep Tayyip Erdoğan, Mehmet Ali Erbil, Kıvanç Tatlıtuğ, Anadolu, Ankara";
 		DBPediaSpotlight dbPediaSpotlight = new DBPediaSpotlight();
 		Vector<AnnotatedKeyword> spottedKeywords = new Vector<>();
-		spottedKeywords = dbPediaSpotlight.getAnnotatedProperNames(text);
+		//spottedKeywords = dbPediaSpotlight.getAnnotatedProperNames(text);
 		//DBPediaSpotlight dbPediaSpotlight = new DBPediaSpotlight();
 		//Vector<AnnotatedKeyword> spottedKeywords = new Vector<>();
 		//spottedKeywords = dbPediaSpotlight.getAnnotatedProperNames(text);
@@ -45,12 +47,24 @@ public class Main {
 		
 		FreebaseTVProgramRequest programRequest = new FreebaseTVProgramRequest();
 		programRequest.generateInstance();
-		System.out.println(programRequest.findActorsbyMid("/m/0c41fkt"));
+		//System.out.println(programRequest.findActorsbyMid("/m/01xrzk0"));
 		//System.out.println(result);
 		
-		/*FreebaseProgramSearchRequest programSearch = new FreebaseProgramSearchRequest();
-		programSearch.generateInstance();
-		programSearch.getProgramSearchResults("sevgililer günü");*/
+		FreebaseProgramSearchRequest programSearch = new FreebaseProgramSearchRequest();
+		//programSearch.generateInstance();
+		String mid = programSearch.getProgramMid("Muhteşem Yüzyıl", "Haber");
+		if(mid != null){
+			System.out.println(mid);
+			System.out.println(programRequest.findActorsbyMid(mid));	
+		}
+		
+		SentenceCreater sentenceCreater = new SentenceCreater();
+		sentenceCreater.createSentenceBySentenceText("input.txt", "sentenceBySentence.txt");
+		int[] wantedEntities = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+		String outputType = "TXT";
+		ModifiedListCreator modifiedListCreator = new ModifiedListCreator();
+		modifiedListCreator.createModifiedLitst(wantedEntities, outputType);
+		modifiedListCreator.printWordListToFile();
  
 	}
 	

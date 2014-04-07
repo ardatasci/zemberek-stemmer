@@ -7,8 +7,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 
-import KeywordExtraction.AnnotatedKeyword;
-import KeywordExtraction.DBPediaSpotlight;
+import KeywordExtraction.DBPediaSptlight.AnnotatedKeyword;
+import KeywordExtraction.DBPediaSptlight.DBPediaSpotlight;
 
 public class EPGReader {
 	
