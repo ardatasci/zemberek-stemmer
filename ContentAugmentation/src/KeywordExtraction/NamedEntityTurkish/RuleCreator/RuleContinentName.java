@@ -1,11 +1,12 @@
-package KeywordExtraction.NamedEntityTurkish.RuleCreater;
+package KeywordExtraction.NamedEntityTurkish.RuleCreator;
 
 import java.util.ArrayList;
 
 import tr.edu.hacettepe.cs.minio.MinioReader;
 import KeywordExtraction.NamedEntityTurkish.Word;
+import KeywordExtraction.NamedEntityTurkish.enums.WordType;
 
-public class RuleContinentName {
+public class RuleContinentName extends Rule{
 	ArrayList<String> continents = new ArrayList<String>();
 
 	ArrayList<Word> wordsList = new ArrayList<Word>();
@@ -38,21 +39,21 @@ public class RuleContinentName {
 					if (wordsList.get(i).getClearedContent().equals("Amerika")) {
 						try {
 
-							if (wordsList.get(i + 1).getType().equals("countryName")) {
-								wordsList.get(i).setType("countryName");
-								wordsList.get(i + 1).setType("countryName");
+							if (wordsList.get(i + 1).getType().equals(WordType.COUNTRY)) {
+								wordsList.get(i).setType(WordType.COUNTRY);
+								wordsList.get(i + 1).setType(WordType.COUNTRY);
 							} else if (i != 0
 									&& (wordsList.get(i - 1).getClearedContent()
 											.equals("Kuzey") || wordsList
 											.get(i - 1).getClearedContent()
 											.equals("Güney"))) {
-								wordsList.get(i - 1).setType("continentName");
+								wordsList.get(i - 1).setType(WordType.CONTINENT);
 								wordsList.get(i - 1).setContent(
 										wordsList.get(i - 1).getContent() + " "
 												+ wordsList.remove(i).getClearedContent());
 								i--;
 							} else {
-								wordsList.get(i).setType("continentName");
+								wordsList.get(i).setType(WordType.CONTINENT);
 							}
 						} catch (Exception e) {
 							if (i != 0
@@ -60,28 +61,28 @@ public class RuleContinentName {
 											.equals("Kuzey") || wordsList
 											.get(i - 1).getClearedContent()
 											.equals("Güney"))) {
-								wordsList.get(i - 1).setType("continentName");
+								wordsList.get(i - 1).setType(WordType.CONTINENT);
 								wordsList.get(i - 1).setContent(
 										wordsList.get(i - 1).getContent() + " "
 												+ wordsList.remove(i).getContent());
 								i--;
 							} else {
-								wordsList.get(i).setType("continentName");
+								wordsList.get(i).setType(WordType.CONTINENT);
 							}
 						}
 
 					} else if (i != wordsList.size() - 1
 							&& wordsList.get(i + 1).getClearedContent()
 									.contains("kıta")) {
-						wordsList.get(i).setType("continentName");
+						wordsList.get(i).setType(WordType.CONTINENT);
 						// wordsList.get(i+1).setType("continentName");
-					} else if (wordsList.get(i).getType().equals("countryName")
-							|| wordsList.get(i).getType().equals("continentName")) {
-						if (wordsList.get(i + 1).getType().equals("countryName")) {
-							wordsList.get(i).setType("countryName");
+					} else if (wordsList.get(i).getType().equals(WordType.COUNTRY)
+							|| wordsList.get(i).getType().equals(WordType.CONTINENT)) {
+						if (wordsList.get(i + 1).getType().equals(WordType.COUNTRY)) {
+							wordsList.get(i).setType(WordType.COUNTRY);
 						}
 					} else {
-						wordsList.get(i).setType("continentName");
+						wordsList.get(i).setType(WordType.CONTINENT);
 					}
 				}
 			}

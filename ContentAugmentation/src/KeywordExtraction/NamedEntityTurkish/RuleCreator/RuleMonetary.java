@@ -1,11 +1,12 @@
-package KeywordExtraction.NamedEntityTurkish.RuleCreater;
+package KeywordExtraction.NamedEntityTurkish.RuleCreator;
 
 import java.util.ArrayList;
 
 import tr.edu.hacettepe.cs.minio.MinioReader;
 import KeywordExtraction.NamedEntityTurkish.Word;
+import KeywordExtraction.NamedEntityTurkish.enums.WordType;
 
-public class RuleMonetary {
+public class RuleMonetary extends Rule{
 	ArrayList<String> monetaryPostfixes = new ArrayList<String>();
 	ArrayList<String> monetaryPrefixes = new ArrayList<String>();
 	ArrayList<String> numbers = new ArrayList<String>();
@@ -60,7 +61,7 @@ public class RuleMonetary {
 			}
 
 			if (monetaryPostfixFound) {
-				wordsList.get(i).setType("monetary");
+				wordsList.get(i).setType(WordType.MONETARY);
 				try {
 					int j = Integer
 							.parseInt(wordsList.get(i - 1).getClearedContent()
@@ -68,7 +69,7 @@ public class RuleMonetary {
 											wordsList.get(i - 1).getClearedContent()
 													.length()));
 					if (j >= 0) {
-						wordsList.get(i - 1).setType("monetary");
+						wordsList.get(i - 1).setType(WordType.MONETARY);
 					}
 				} catch (Exception e) {
 					// TODO: handle exception
@@ -78,8 +79,8 @@ public class RuleMonetary {
 							for (String number : numbers) {
 								if ((wordsList.get(i - k).getClearedContent())
 										.contains(number)) {
-									wordsList.get(i).setType("monetary");
-									wordsList.get(i - k).setType("monetary");
+									wordsList.get(i).setType(WordType.MONETARY);
+									wordsList.get(i - k).setType(WordType.MONETARY);
 									writtenNumberFound = true;
 									break;
 								} else {
@@ -91,7 +92,7 @@ public class RuleMonetary {
 														.length()));
 
 										wordsList.get(i - k)
-												.setType("monetary");
+												.setType(WordType.MONETARY);
 										writtenNumberFound = true;
 									} catch (Exception e2) {
 										// TODO: handle exception
@@ -124,7 +125,7 @@ public class RuleMonetary {
 			}
 
 			if (monetaryPrefixFound) {
-				wordsList.get(i).setType("monetary");
+				wordsList.get(i).setType(WordType.MONETARY);
 
 				try {
 					int j = Integer
@@ -133,7 +134,7 @@ public class RuleMonetary {
 											wordsList.get(i + 1).getClearedContent()
 													.length() - 1));
 					if (j >= 0) {
-						wordsList.get(i + 1).setType("monetary");
+						wordsList.get(i + 1).setType(WordType.MONETARY);
 					}
 				} catch (Exception e) {
 					// TODO: handle exception

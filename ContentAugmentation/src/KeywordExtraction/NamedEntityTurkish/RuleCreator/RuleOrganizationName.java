@@ -1,11 +1,12 @@
-package KeywordExtraction.NamedEntityTurkish.RuleCreater;
+package KeywordExtraction.NamedEntityTurkish.RuleCreator;
 
 import java.util.ArrayList;
 
 import tr.edu.hacettepe.cs.minio.MinioReader;
 import KeywordExtraction.NamedEntityTurkish.Word;
+import KeywordExtraction.NamedEntityTurkish.enums.WordType;
 
-public class RuleOrganizationName {
+public class RuleOrganizationName extends Rule{
 	ArrayList<String> organizationPostfixes = new ArrayList<String>();
 
 	ArrayList<Word> wordsList = new ArrayList<Word>();
@@ -41,14 +42,14 @@ public class RuleOrganizationName {
 			}
 
 			if (organizationPostFixesFound) {
-				wordsList.get(i).setType("organizationName");
+				wordsList.get(i).setType(WordType.ORGANIZATION);
 				try {
 					int k = 1;
 
-					while ((wordsList.get(i - k).getType()).equals("possibleName")
-							|| (wordsList.get(i - k).getType()).equals("cityName")
+					while ((wordsList.get(i - k).getType()).equals(WordType.POSSIBLE)
+							|| (wordsList.get(i - k).getType()).equals(WordType.CITY)
 							|| (wordsList.get(i - k).getType())
-									.equals("organizationName")) {
+									.equals(WordType.ORGANIZATION)) {
 						if (wordsList.get(i - k).getContent().substring(
 								wordsList.get(i - k).getContent().length() - 2,
 								wordsList.get(i - k).getContent().length() - 1)
@@ -58,7 +59,7 @@ public class RuleOrganizationName {
 						if (wordsList.get(i - k).getContent().substring(0,
 								wordsList.get(i - k).getContent().length() - 1)
 								.equals(wordsList.get(i - k).getClearedContent())) {
-							wordsList.get(i - k).setType("organizationName");
+							wordsList.get(i - k).setType(WordType.ORGANIZATION);
 
 						}
 						// wordsList.get(i-k).setType("organizationName");

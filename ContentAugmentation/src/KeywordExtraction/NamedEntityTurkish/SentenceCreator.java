@@ -8,11 +8,11 @@ import tr.edu.hacettepe.cs.minio.MinioReader;
 import tr.edu.hacettepe.cs.minio.MinioWriter;
 
 
-public class SentenceCreater {
+public class SentenceCreator {
 	ArrayList<String> sentence;
 	ArrayList<String> temp;
 	char[] smallLetters = {'a', 'b', 'c', 'ç', 'd', 'e', 'f', 'g', 'ğ', 'h', 'ı', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'ö', 'p', 'r', 's', 'ş', 't', 'u', 'ü', 'v', 'y', 'z'};
- 	public SentenceCreater()
+ 	public SentenceCreator()
 	{
 		
 	}

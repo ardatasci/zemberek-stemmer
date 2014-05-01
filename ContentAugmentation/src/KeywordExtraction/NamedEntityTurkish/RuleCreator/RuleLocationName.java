@@ -1,11 +1,12 @@
-package KeywordExtraction.NamedEntityTurkish.RuleCreater;
+package KeywordExtraction.NamedEntityTurkish.RuleCreator;
 
 import java.util.ArrayList;
 
 import tr.edu.hacettepe.cs.minio.MinioReader;
 import KeywordExtraction.NamedEntityTurkish.Word;
+import KeywordExtraction.NamedEntityTurkish.enums.WordType;
 
-public class RuleLocationName {
+public class RuleLocationName extends Rule{
 	ArrayList<String> addressIdentifiers = new ArrayList<String>();
 
 	ArrayList<Word> wordsList = new ArrayList<Word>();
@@ -40,17 +41,17 @@ public class RuleLocationName {
 			}
 
 			if (addressIdentifierFound) {
-				wordsList.get(i).setType("locationName");
+				wordsList.get(i).setType(WordType.LOCATION);
 				try {
 					int k = 1;
-					while ((wordsList.get(i - k).getType()).equals("possibleName")) {
+					while ((wordsList.get(i - k).getType()).equals(WordType.POSSIBLE)) {
 						if (wordsList.get(i - k).getContent().substring(
 								wordsList.get(i - k).getContent().length() - 2,
 								wordsList.get(i - k).getContent().length() - 1)
 								.equals(",")) {
 							break;
 						}
-						wordsList.get(i - k).setType("locationName");
+						wordsList.get(i - k).setType(WordType.LOCATION);
 						k++;
 					}
 
@@ -64,8 +65,8 @@ public class RuleLocationName {
 				try {
 					if ((wordsList.get(i).getContent().substring(j, j + 1))
 							.equals("/")) {
-						if ((wordsList.get(i).getType()).equals("possibleName")) {
-							wordsList.get(i).setType("locationName");
+						if ((wordsList.get(i).getType()).equals(WordType.POSSIBLE)) {
+							wordsList.get(i).setType(WordType.LOCATION);
 						}
 
 					}

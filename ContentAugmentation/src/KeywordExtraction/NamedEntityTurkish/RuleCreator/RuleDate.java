@@ -1,11 +1,12 @@
-package KeywordExtraction.NamedEntityTurkish.RuleCreater;
+package KeywordExtraction.NamedEntityTurkish.RuleCreator;
 
 import java.util.ArrayList;
 
 import tr.edu.hacettepe.cs.minio.MinioReader;
 import KeywordExtraction.NamedEntityTurkish.Word;
+import KeywordExtraction.NamedEntityTurkish.enums.WordType;
 
-public class RuleDate {
+public class RuleDate extends Rule{
 	ArrayList<String> months = new ArrayList<String>();
 	ArrayList<String> dateWords = new ArrayList<String>();
 
@@ -50,7 +51,7 @@ public class RuleDate {
 			}
 
 			if (monthFound) {
-				wordsList.get(i).setType("date");
+				wordsList.get(i).setType(WordType.DATE);
 
 				try {
 					int j = Integer
@@ -59,7 +60,7 @@ public class RuleDate {
 											wordsList.get(i - 1).getClearedContent()
 													.length()));
 					if (24 >= j && j > 1) {
-						wordsList.get(i - 1).setType("date");
+						wordsList.get(i - 1).setType(WordType.DATE);
 					}
 				} catch (Exception e) {
 					// TODO: handle exception
@@ -71,7 +72,7 @@ public class RuleDate {
 											wordsList.get(i + 1).getClearedContent()
 													.length()));
 					if (j > -2000) {
-						wordsList.get(i + 1).setType("date");
+						wordsList.get(i + 1).setType(WordType.DATE);
 					}
 				} catch (Exception e) {
 					// TODO: handle exception
@@ -90,7 +91,7 @@ public class RuleDate {
 						try {
 							int l = Integer.parseInt(clearedContent.substring(
 									j + 1, clearedContent.length() - 1));
-							wordsList.get(i).setType("date");
+							wordsList.get(i).setType(WordType.DATE);
 						} catch (Exception e) {
 							// TODO: handle exception
 							for (int m = j + 1; m < clearedContent.length(); m++) {
@@ -103,7 +104,7 @@ public class RuleDate {
 									try {
 										int n = Integer.parseInt(clearedContent
 												.substring(j + 1, m));
-										wordsList.get(i).setType("date");
+										wordsList.get(i).setType(WordType.DATE);
 									} catch (Exception e1) {
 										// TODO: handle exception
 									}
@@ -129,8 +130,8 @@ public class RuleDate {
 				try {
 					int n = Integer.parseInt(wordsList.get(i - 1)
 							.getClearedContent());
-					wordsList.get(i - 1).setType("date");
-					wordsList.get(i).setType("date");
+					wordsList.get(i - 1).setType(WordType.DATE);
+					wordsList.get(i).setType(WordType.DATE);
 				} catch (Exception e1) {
 					// TODO: handle exception
 				}

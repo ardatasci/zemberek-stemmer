@@ -1,11 +1,12 @@
-package KeywordExtraction.NamedEntityTurkish.RuleCreater;
+package KeywordExtraction.NamedEntityTurkish.RuleCreator;
 
 import java.util.ArrayList;
 
 import tr.edu.hacettepe.cs.minio.MinioReader;
 import KeywordExtraction.NamedEntityTurkish.Word;
+import KeywordExtraction.NamedEntityTurkish.enums.WordType;
 
-public class RuleTime {
+public class RuleTime extends Rule{
 	ArrayList<String> hours = new ArrayList<String>();
 	ArrayList<String> timeWords = new ArrayList<String>();
 
@@ -58,7 +59,7 @@ public class RuleTime {
 									if ((wordsList.get(i + 1).getType()) != null) {
 
 									} else {
-										wordsList.get(i).setType("time");
+										wordsList.get(i).setType(WordType.TIME);
 									}
 								}
 
@@ -81,12 +82,12 @@ public class RuleTime {
 			}
 
 			if (zamanWordFound) {
-				wordsList.get(i).setType("time");
+				wordsList.get(i).setType(WordType.TIME);
 				try {
 					int j = Integer.parseInt(wordsList.get(i - 1).getContent()
 							.substring(0,
 									wordsList.get(i - 1).getContent().length() - 1));
-					wordsList.get(i - 1).setType("time");
+					wordsList.get(i - 1).setType(WordType.TIME);
 
 				} catch (Exception e) {
 					// TODO: handle exception
@@ -97,7 +98,7 @@ public class RuleTime {
 						for (String hour : hours) {
 							if ((wordsList.get(i - k).getClearedContent())
 									.contains(hour)) {
-								wordsList.get(i - k).setType("time");
+								wordsList.get(i - k).setType(WordType.TIME);
 								writtenNumberFound = true;
 								break;
 							} else {
@@ -109,7 +110,7 @@ public class RuleTime {
 						for (String hour : hours) {
 							if ((wordsList.get(i + k).getClearedContent())
 									.contains(hour)) {
-								wordsList.get(i + k).setType("time");
+								wordsList.get(i + k).setType(WordType.TIME);
 								writtenNumberFound = true;
 								break;
 							} else {

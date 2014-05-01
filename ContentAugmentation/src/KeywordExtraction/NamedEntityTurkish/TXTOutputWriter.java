@@ -3,6 +3,8 @@ package KeywordExtraction.NamedEntityTurkish;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import KeywordExtraction.NamedEntityTurkish.enums.WordType;
+
 import tr.edu.hacettepe.cs.minio.MinioReader;
 import tr.edu.hacettepe.cs.minio.MinioWriter;
 
@@ -18,9 +20,9 @@ public class TXTOutputWriter {
 	{
 		String line = "";
 		String fullText = "";
-		String previousType = null;
+		WordType previousType = null;
 		String stringToWrite = null;
-		String type = "";
+		WordType type = null;
 		
 		int position = 0;
 		MinioReader in;
@@ -49,21 +51,21 @@ public class TXTOutputWriter {
 			if ( (((Word)modifiedWordsList.get(i)).type) != null )
 			{
 				type = ((Word)modifiedWordsList.get(i)).type;
-				if (type.equals("possibleName"))
+				if (type.equals(WordType.POSSIBLE))
 				{
 					
 					try
 					{
-						if ( previousType == null || previousType.equals("possibleName") )
+						if ( previousType == null || previousType.equals(WordType.POSSIBLE) )
 						{
 							out.print( ((Word)modifiedWordsList.get(i)).content );
-							previousType = "possibleName";
+							previousType = WordType.POSSIBLE;
 						}
 						else
 						{
 							out.print( "(" + stringToWrite + " : " + previousType + ")" );
 							out.print( ((Word)modifiedWordsList.get(i)).content );
-							previousType = "possibleName";
+							previousType = WordType.POSSIBLE;
 							stringToWrite = null;
 						}
 						
@@ -83,9 +85,9 @@ public class TXTOutputWriter {
 					//out.write( "<" + type + ">" + ((Word)modifiedWordsList.get(i)).content + "</" + type + ">" );
 					try
 					{
-						if ( previousType == null || previousType.equals("possibleName") )
+						if ( previousType == null || previousType.equals(WordType.POSSIBLE) )
 						{
-							if ( type.equals("abbreviation") || type.equals("cityName") || type.equals("countryName") || type.equals("continentName") )
+							if ( type.equals(WordType.ABBREVIATION) || type.equals(WordType.CITY) || type.equals(WordType.COUNTRY) || type.equals(WordType.CONTINENT) )
 							{
 								out.print( "(" + ((Word)modifiedWordsList.get(i)).content + " : " + type + ")" );
 								stringToWrite = null;
@@ -105,7 +107,7 @@ public class TXTOutputWriter {
 								if ( previousType.equals(type) )
 								{
 									
-									if ( type.equals("abbreviation") || type.equals("cityName") || type.equals("countryName") || type.equals("continentName") )
+									if ( type.equals(WordType.ABBREVIATION) || type.equals(WordType.CITY) || type.equals(WordType.COUNTRY) || type.equals(WordType.CONTINENT) )
 									{
 										out.print( "(" + ((Word)modifiedWordsList.get(i)).content + " : " + type + ")" );
 										stringToWrite = null;
@@ -149,7 +151,7 @@ public class TXTOutputWriter {
 			{
 				try
 				{
-					if ( previousType == null || previousType.equals("possibleName") )
+					if ( previousType == null || previousType.equals(WordType.POSSIBLE) )
 					{
 						out.print( ((Word)modifiedWordsList.get(i)).content );
 						previousType = null;

@@ -1,10 +1,11 @@
-package KeywordExtraction.NamedEntityTurkish.RuleCreater;
+package KeywordExtraction.NamedEntityTurkish.RuleCreator;
 
 import java.util.ArrayList;
 
 import KeywordExtraction.NamedEntityTurkish.Word;
+import KeywordExtraction.NamedEntityTurkish.enums.WordType;
 
-public class RulePossibleNames {
+public class RuleAbbreviation extends Rule{
 
 	ArrayList<Word> wordsList = new ArrayList<Word>();
 	ArrayList<Word> modifiedWordsList = new ArrayList<Word>();
@@ -13,18 +14,18 @@ public class RulePossibleNames {
  	
 	String clearedContent = "";
 	
-	public RulePossibleNames()
+	public RuleAbbreviation()
 	{
 
 	}
 	
 	
-	public ArrayList<Word> containsName(ArrayList<Word> wordsList)
+	public ArrayList<Word> containsAbbreviation(ArrayList<Word> wordsList)
 	{
 		this.wordsList = wordsList;
 		// XXX -- ici doldurulacak
 		boolean capitalLetterFound = false;
-		boolean cik =false;
+		boolean notAbbreviation =false;
 		
 		for (int i = 0; i < wordsList.size(); i++)
 		{
@@ -41,24 +42,29 @@ public class RulePossibleNames {
 					{
 						capitalLetterFound = true;
 						break;
-					}			
-					
-				}
-				if (!capitalLetterFound)
-				{
-					break;
+					}
+					else if ( (clearedContent.substring(j, j+1)).equals(".") && j > 0 )
+					{
+						capitalLetterFound = true;
+						break;
+					}
 				}
 				
+				if (!capitalLetterFound)
+				{
+					notAbbreviation=true;
+					break;
+				}
+				capitalLetterFound = false;
 			}
 			
-			if (capitalLetterFound)
+			if (!notAbbreviation)
 			{
-				wordsList.get(i).setType("possibleName");
+				wordsList.get(i).setType(WordType.ABBREVIATION);
 			}
 			capitalLetterFound = false;
+			notAbbreviation = false;
 		}
-		
-		
 		modifiedWordsList = wordsList;
 		
 		return modifiedWordsList;

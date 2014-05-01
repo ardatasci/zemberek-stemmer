@@ -1,11 +1,12 @@
-package KeywordExtraction.NamedEntityTurkish.RuleCreater;
+package KeywordExtraction.NamedEntityTurkish.RuleCreator;
 
 import java.util.ArrayList;
 
 import tr.edu.hacettepe.cs.minio.MinioReader;
 import KeywordExtraction.NamedEntityTurkish.Word;
+import KeywordExtraction.NamedEntityTurkish.enums.WordType;
 
-public class RulePercentage {
+public class RulePercentage extends Rule{
 	ArrayList<String> percentagePrefixes = new ArrayList<String>();
 	ArrayList<String> numbers = new ArrayList<String>();
 
@@ -60,8 +61,8 @@ public class RulePercentage {
 											wordsList.get(i + 1).getClearedContent()
 													.length()));
 					if (j >= 0) {
-						wordsList.get(i).setType("percentage");
-						wordsList.get(i + 1).setType("percentage");
+						wordsList.get(i).setType(WordType.PERCENTAGE);
+						wordsList.get(i + 1).setType(WordType.PERCENTAGE);
 					}
 				} catch (Exception e) {
 					// TODO: handle exception
@@ -71,8 +72,8 @@ public class RulePercentage {
 							for (String number : numbers) {
 								if ((wordsList.get(i + k).getClearedContent())
 										.contains(number)) {
-									wordsList.get(i).setType("percentage");
-									wordsList.get(i + k).setType("percentage");
+									wordsList.get(i).setType(WordType.PERCENTAGE);
+									wordsList.get(i + k).setType(WordType.PERCENTAGE);
 									writtenNumberFound = true;
 									break;
 								} else {
@@ -101,7 +102,7 @@ public class RulePercentage {
 				if ((clearedContent.substring(0, 1)).equals("%")) {
 					int l = Integer.parseInt(clearedContent.substring(1,
 							clearedContent.length() - 1));
-					wordsList.get(i).setType("percentage");
+					wordsList.get(i).setType(WordType.PERCENTAGE);
 				}
 			} catch (Exception e) {
 				// TODO: handle exception

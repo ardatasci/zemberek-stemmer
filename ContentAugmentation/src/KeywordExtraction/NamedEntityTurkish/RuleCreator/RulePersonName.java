@@ -1,11 +1,12 @@
-package KeywordExtraction.NamedEntityTurkish.RuleCreater;
+package KeywordExtraction.NamedEntityTurkish.RuleCreator;
 
 import java.util.ArrayList;
 
 import tr.edu.hacettepe.cs.minio.MinioReader;
 import KeywordExtraction.NamedEntityTurkish.Word;
+import KeywordExtraction.NamedEntityTurkish.enums.WordType;
 
-public class RulePersonName {
+public class RulePersonName extends Rule{
 	ArrayList<String> personNames = new ArrayList<String>();
 	ArrayList<String> preNouns = new ArrayList<String>();
 	ArrayList<String> postNouns = new ArrayList<String>();
@@ -48,43 +49,45 @@ public class RulePersonName {
 
 	public ArrayList<Word> containsPersonName(ArrayList<Word> wordsList) {
 		this.wordsList = wordsList;
+		
+		//findEntitiesInDictionary(wordsList, personNames, WordType.PERSON);
 
 		for (int i = 0; i < wordsList.size(); i++) {
 			wordsList.get(i).cleareContent();
 
 			clearedContent = wordsList.get(i).getClearedContent();
 			content = wordsList.get(i).getContent();
-
 			for (String personName : personNames) {
 
-				if (clearedContent.contains(personName)
-						&& !wordsList.get(i).getType().equals("locationName")
-						&& !wordsList.get(i).getType().equals("organizationName")
-						&& !wordsList.get(i).getType().equals("date")) {
-					if(personName.equalsIgnoreCase("Yunus") || personName.equalsIgnoreCase("Emre")){
-						System.out.println("Yunus Emre");
-					}
-					if(wordsList.get(i + 1).equals("Emre")){
-						System.out.println("bldum");
-					}
-					wordsList.get(i).setType("personName");
-					wordsList.get(i).setSubType("name");
+				//if (clearedContent.contains(personName)
+				if (clearedContent.equals(personName)
+						&& !wordsList.get(i).getType().equals(WordType.LOCATION)
+						&& !wordsList.get(i).getType().equals(WordType.ORGANIZATION)
+						&& !wordsList.get(i).getType().equals(WordType.DATE)) {
+//					if(personName.equalsIgnoreCase("Yunus") || personName.equalsIgnoreCase("Emre")){
+//						System.out.println("Yunus Emre");
+//					}
+//					if(wordsList.get(i + 1).equals("Emre")){
+//						System.out.println("bldum");
+//					}
+					wordsList.get(i).setType(WordType.PERSON);
+					wordsList.get(i).setSubType(WordType.NAME);
 
 					try {
-						if (wordsList.get(i + 1).getType().equals("possibleName")
-								|| wordsList.get(i + 1).getType().equals("person")) {
-							if(wordsList.get(i + 1).equals("Emre")){
-								System.out.println("bldum");
-							}
-							wordsList.get(i + 1).setType("personName");
-							wordsList.get(i + 1).setSubType("name");
+						if (wordsList.get(i + 1).getType().equals(WordType.POSSIBLE)
+								|| wordsList.get(i + 1).getType().equals(WordType.PERSON)) {
+//							if(wordsList.get(i + 1).equals("Emre")){
+//								System.out.println("bldum");
+//							}
+							wordsList.get(i + 1).setType(WordType.PERSON);
+							wordsList.get(i + 1).setSubType(WordType.NAME);
 							preFoundPersonList.add(wordsList.get(i + 1));
 						}
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
-				} else if (clearedContent.contains(personName)) {
-					wordsList.get(i).setSubType("name");
+				} else if (clearedContent.equals(personName)) {
+					wordsList.get(i).setSubType(WordType.NAME);
 				}
 			}
 
@@ -100,22 +103,22 @@ public class RulePersonName {
 			if (preNounFound) {
 				try {
 					int k = 1;
-					while ((wordsList.get(i + k).getType()).equals("possibleName")
-							|| (wordsList.get(i + k).getType()).equals("personName")) {
-						wordsList.get(i).setType("personName");
+					while ((wordsList.get(i + k).getType()).equals(WordType.POSSIBLE)
+							|| (wordsList.get(i + k).getType()).equals(WordType.PERSON)) {
+						wordsList.get(i).setType(WordType.PERSON);
 						int l = 1;
 						try {
 							while (k == 1
 									&& (wordsList.get(i - l).getType())
-											.equals("organizationName")) {
+											.equals(WordType.ORGANIZATION)) {
 								if ((wordsList.get(i - l).getContent()
 										.substring(0,
 												wordsList.get(i - l).getContent()
 														.length() - 1))
 										.equals(wordsList.get(i - l).getClearedContent())) {
-									wordsList.get(i - l).setType("personName");
+									wordsList.get(i - l).setType(WordType.PERSON);
 									wordsList.get(i - l).setSubType(
-											"organization");
+											WordType.ORGANIZATION);
 
 								}
 								l++;
@@ -133,7 +136,7 @@ public class RulePersonName {
 								l = 2;
 								while (k == 1
 										&& (wordsList.get(i - l).getType())
-												.equals("cityName")) {
+												.equals(WordType.CITY)) {
 									if ((wordsList.get(i - l).getContent()
 											.substring(
 													0,
@@ -141,8 +144,8 @@ public class RulePersonName {
 															.length() - 1))
 											.equals(wordsList.get(i - l).getClearedContent())) {
 										wordsList.get(i - l).setType(
-												"personName");
-										wordsList.get(i - l).setSubType("city");
+												WordType.PERSON);
+										wordsList.get(i - l).setSubType(WordType.CITY);
 									}
 									l++;
 								}
@@ -155,7 +158,7 @@ public class RulePersonName {
 								wordsList.get(i + k).getContent().length() - 2,
 								wordsList.get(i + k).getContent().length() - 1)
 								.equals(",")) {
-							wordsList.get(i + k).setType("personName");
+							wordsList.get(i + k).setType(WordType.PERSON);
 							preFoundPersonList.add(wordsList.get(i + k));
 							break;
 						}
@@ -173,7 +176,7 @@ public class RulePersonName {
 
 						}
 
-						wordsList.get(i + k).setType("personName");
+						wordsList.get(i + k).setType(WordType.PERSON);
 						k++;
 					}
 
@@ -184,7 +187,7 @@ public class RulePersonName {
 			}
 
 			for (String postNoun : postNouns) {
-				if (clearedContent.contains(postNoun)) {
+				if (clearedContent.equals(postNoun)) {
 					postNounFound = true;
 				}
 			}
@@ -193,25 +196,25 @@ public class RulePersonName {
 				try {
 					int k = 1;
 
-					while ((wordsList.get(i - k).getType()).equals("possibleName")
-							|| (wordsList.get(i - k).getType()).equals("personName")
+					while ((wordsList.get(i - k).getType()).equals(WordType.POSSIBLE)
+							|| (wordsList.get(i - k).getType()).equals(WordType.PERSON)
 							|| (wordsList.get(i - k).getType())
-									.equals("organizationName")
+									.equals(WordType.ORGANIZATION)
 							|| (wordsList.get(i - k).getType())
-									.equals("locationName")) {
+									.equals(WordType.LOCATION)) {
 						if (wordsList.get(i - k).getContent().substring(
 								wordsList.get(i - k).getContent().length() - 2,
 								wordsList.get(i - k).getContent().length() - 1)
 								.equals(",")) {
-							wordsList.get(i).setType("personName");
+							wordsList.get(i).setType(WordType.PERSON);
 
-							wordsList.get(i - k).setType("personName");
+							wordsList.get(i - k).setType(WordType.PERSON);
 							preFoundPersonList.add(wordsList.get(i - k));
 							break;
 						}
 
 						if ((wordsList.get(i - k).getType())
-								.equals("organizationName")
+								.equals(WordType.ORGANIZATION)
 								&& wordsList.get(i - k).getContent()
 										.substring(
 												0,
@@ -219,13 +222,13 @@ public class RulePersonName {
 														.length() - 1)
 										.equals(
 												wordsList.get(i - k).getClearedContent())) {
-							wordsList.get(i).setType("personName");
+							wordsList.get(i).setType(WordType.PERSON);
 
-							wordsList.get(i - k).setType("personName");
+							wordsList.get(i - k).setType(WordType.PERSON);
 							preFoundPersonList.add(wordsList.get(i - k));
 
 						}
-						// wordsList.get(i-k).setType("personName");
+						// wordsList.get(i-k).setType(WordType.PERSON);
 						k++;
 					}
 
@@ -243,8 +246,8 @@ public class RulePersonName {
 			for (int j = 0; j < preFoundPersonList.size(); j++) {
 				if (wordsList.get(i).getClearedContent().equals(preFoundPersonList
 						.get(j).getClearedContent())) {
-					wordsList.get(i).setType("personName");
-					wordsList.get(i).setSubType("name");
+					wordsList.get(i).setType(WordType.PERSON);
+					wordsList.get(i).setSubType(WordType.NAME);
 				}
 
 			}

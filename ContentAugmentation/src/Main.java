@@ -5,7 +5,7 @@ import KeywordAugmentation.Freebase.SearchAPI.FreebaseProgramSearchRequest;
 import KeywordExtraction.DBPediaSptlight.AnnotatedKeyword;
 import KeywordExtraction.DBPediaSptlight.DBPediaSpotlight;
 import KeywordExtraction.NamedEntityTurkish.ModifiedListCreator;
-import KeywordExtraction.NamedEntityTurkish.SentenceCreater;
+import KeywordExtraction.NamedEntityTurkish.SentenceCreator;
 import ResourceCollection.DigiturkEPG.EPGStatisticalExtraction;
 
 
@@ -52,13 +52,13 @@ public class Main {
 		
 		FreebaseProgramSearchRequest programSearch = new FreebaseProgramSearchRequest();
 		//programSearch.generateInstance();
-		String mid = programSearch.getProgramMid("Muhteşem Yüzyıl", "Haber");
+		/*String mid = programSearch.getProgramMid("Muhteşem Yüzyıl", "Haber");
 		if(mid != null){
 			System.out.println(mid);
 			System.out.println(programRequest.findActorsbyMid(mid));	
-		}
+		}*/
 		
-		SentenceCreater sentenceCreater = new SentenceCreater();
+		SentenceCreator sentenceCreater = new SentenceCreator();
 		sentenceCreater.createSentenceBySentenceText("input.txt", "sentenceBySentence.txt");
 		int[] wantedEntities = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 		String outputType = "TXT";

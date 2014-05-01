@@ -1,17 +1,24 @@
 package KeywordExtraction.NamedEntityTurkish;
 
+import KeywordExtraction.NamedEntityTurkish.enums.WordType;
+
 public class Word {
 	
 	String content = "";
 	String clearedContent = null;
 	
 	String affix = "";
-	String type = null;
-	String subType = "";
+	//String type = null;
+	WordType type = null;
+	WordType subType = null;
 	
 	String[] punctuation = {"\"", ":", ".", ",", "’"};
 	String[] reagent = {"\'", "’", "’", "(", ")"};
 	boolean punctiationFound = false;
+	
+	public Word(){
+		
+	}
 	public Word(String content)
 	{
 		this.content = content;
@@ -27,19 +34,19 @@ public class Word {
 		this.content = content;
 	}
 
-	public String getType() {
+	public WordType getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(WordType type) {
 		this.type = type;
 	}
 	
-	public String getSubType() {
+	public WordType getSubType() {
 		return subType;
 	}
 
-	public void setSubType(String subType) {
+	public void setSubType(WordType subType) {
 		this.subType = subType;
 	}
 	

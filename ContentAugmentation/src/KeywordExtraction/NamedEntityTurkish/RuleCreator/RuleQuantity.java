@@ -1,11 +1,12 @@
-package KeywordExtraction.NamedEntityTurkish.RuleCreater;
+package KeywordExtraction.NamedEntityTurkish.RuleCreator;
 
 import java.util.ArrayList;
 
 import tr.edu.hacettepe.cs.minio.MinioReader;
 import KeywordExtraction.NamedEntityTurkish.Word;
+import KeywordExtraction.NamedEntityTurkish.enums.WordType;
 
-public class RuleQuantity {
+public class RuleQuantity extends Rule{
 	ArrayList<String> quantityWords = new ArrayList<String>();
 	ArrayList<String> numbers = new ArrayList<String>();
 	
@@ -56,7 +57,7 @@ public class RuleQuantity {
 	        	
 			if(quantityWordFound)
 			{
-				wordsList.get(i).setType("quantity");
+				wordsList.get(i).setType(WordType.QUANTITY);
 				try {
 					int k = 1;
 					while ( true )
@@ -66,7 +67,7 @@ public class RuleQuantity {
 								if( (wordsList.get(i-k).getClearedContent()).contains(number) )
 								{
 									if ( wordsList.get(i-k).getType() == null ) {
-										wordsList.get(i-k).setType("quantity");
+										wordsList.get(i-k).setType(WordType.QUANTITY);
 										writtenNumberFound = true;
 										break;	
 									}
@@ -76,7 +77,7 @@ public class RuleQuantity {
 									try {
 										int l = Integer.parseInt(wordsList.get(i-k).getClearedContent().substring(0,wordsList.get(i-k).getClearedContent().length()-1));
 										if ( wordsList.get(i-k).getType() == null ) {
-											wordsList.get(i-k).setType("quantity");
+											wordsList.get(i-k).setType(WordType.QUANTITY);
 											writtenNumberFound = true;		
 										}
 									} catch (Exception e2) {

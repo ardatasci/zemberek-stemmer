@@ -2,19 +2,19 @@ package KeywordExtraction.NamedEntityTurkish;
 
 import java.util.ArrayList;
 
-import KeywordExtraction.NamedEntityTurkish.RuleCreater.RuleAbbreviation;
-import KeywordExtraction.NamedEntityTurkish.RuleCreater.RuleCityName;
-import KeywordExtraction.NamedEntityTurkish.RuleCreater.RuleContinentName;
-import KeywordExtraction.NamedEntityTurkish.RuleCreater.RuleCountryName;
-import KeywordExtraction.NamedEntityTurkish.RuleCreater.RuleDate;
-import KeywordExtraction.NamedEntityTurkish.RuleCreater.RuleLocationName;
-import KeywordExtraction.NamedEntityTurkish.RuleCreater.RuleMonetary;
-import KeywordExtraction.NamedEntityTurkish.RuleCreater.RuleOrganizationName;
-import KeywordExtraction.NamedEntityTurkish.RuleCreater.RulePercentage;
-import KeywordExtraction.NamedEntityTurkish.RuleCreater.RulePersonName;
-import KeywordExtraction.NamedEntityTurkish.RuleCreater.RulePossibleNames;
-import KeywordExtraction.NamedEntityTurkish.RuleCreater.RuleQuantity;
-import KeywordExtraction.NamedEntityTurkish.RuleCreater.RuleTime;
+import KeywordExtraction.NamedEntityTurkish.RuleCreator.RuleAbbreviation;
+import KeywordExtraction.NamedEntityTurkish.RuleCreator.RuleCityName;
+import KeywordExtraction.NamedEntityTurkish.RuleCreator.RuleContinentName;
+import KeywordExtraction.NamedEntityTurkish.RuleCreator.RuleCountryName;
+import KeywordExtraction.NamedEntityTurkish.RuleCreator.RuleDate;
+import KeywordExtraction.NamedEntityTurkish.RuleCreator.RuleLocationName;
+import KeywordExtraction.NamedEntityTurkish.RuleCreator.RuleMonetary;
+import KeywordExtraction.NamedEntityTurkish.RuleCreator.RuleOrganizationName;
+import KeywordExtraction.NamedEntityTurkish.RuleCreator.RulePercentage;
+import KeywordExtraction.NamedEntityTurkish.RuleCreator.RulePersonName;
+import KeywordExtraction.NamedEntityTurkish.RuleCreator.RulePossibleNames;
+import KeywordExtraction.NamedEntityTurkish.RuleCreator.RuleQuantity;
+import KeywordExtraction.NamedEntityTurkish.RuleCreator.RuleTime;
 
 
 public class EntityFinder {
@@ -51,6 +51,7 @@ public class EntityFinder {
 	{
 		this.wantedEntities = wantedEntities;
 		this.wordsList = wordsList;
+
 		
 		// XXX -- asil is burada yapilacak
 		// burada cumleler tek tek geliyo yani sadece bir cumlenin icindeki entity ler bulunacak
@@ -59,7 +60,10 @@ public class EntityFinder {
 		
 		
 		
-			modifiedWordsList = rulePossibleNames.containsName(wordsList);
+		modifiedWordsList = rulePossibleNames.containsName(wordsList);
+		//modifiedWordsList = rulePossibleNames.determinePossibleNames(wordsList);
+
+			
 		
 		if (wantedEntities[0] == 1) {
 			modifiedWordsList = ruleAbbreviation.containsAbbreviation(wordsList);

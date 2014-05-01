@@ -1,8 +1,12 @@
 package KeywordExtraction.NamedEntityTurkish;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+
+import KeywordExtraction.NamedEntityTurkish.enums.WordType;
 
 import tr.edu.hacettepe.cs.minio.MinioReader;
 
@@ -12,6 +16,7 @@ public class ModifiedListCreator {
 	ArrayList<Word> modifiedWordsList = new ArrayList<Word>();
 	ArrayList<Word> namedEntityWordList = new ArrayList<Word>();
 	ArrayList<Word> allWordList = new ArrayList<Word>();
+	UtilFunctions utilFunctions = new UtilFunctions();
 
 	int[] wantedEntities;
 	String outputType = "";
@@ -51,12 +56,24 @@ public class ModifiedListCreator {
 			wordsList.clear();
 		}
 		in.close();
+
 		extractNamedEntityWords(allWordList);
+		try {
+			utilFunctions.writeWordsToFile("AnnotatedWords.txt", namedEntityWordList);
+			utilFunctions.writeWordsToFile("AllWords.txt", allWordList);
+			utilFunctions.writeWordsToFile("MyAnnotatedWords.txt", AnnotatedWordListCreator.getInstance().getAnnotatedWordList());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private void extractNamedEntityWords(ArrayList<Word> wordList){
 		for (Word modifiedWord : wordList) {
-			if(modifiedWord.getType() != null && !modifiedWord.getType().equals("possibleName")){
+			if(modifiedWord.getType() != null && modifiedWord.getType().equals(WordType.POSSIBLE)){
 				namedEntityWordList.add(modifiedWord);
 			}
 		}

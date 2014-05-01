@@ -1,11 +1,12 @@
-package KeywordExtraction.NamedEntityTurkish.RuleCreater;
+package KeywordExtraction.NamedEntityTurkish.RuleCreator;
 
 import java.util.ArrayList;
 
 import tr.edu.hacettepe.cs.minio.MinioReader;
 import KeywordExtraction.NamedEntityTurkish.Word;
+import KeywordExtraction.NamedEntityTurkish.enums.WordType;
 
-public class RuleCityName {
+public class RuleCityName extends Rule {
 	ArrayList<String> cities = new ArrayList<String>();
 
 	ArrayList<Word> wordsList = new ArrayList<Word>();
@@ -32,10 +33,10 @@ public class RuleCityName {
 
 			clearedContent = wordsList.get(i).getClearedContent();
 			boolean exist = cities.contains(clearedContent);
-			if (exist && (( wordsList.get(i).getType() != null && !wordsList.get(i).getType().equals("locationName")
-					&& !wordsList.get(i).getType().equals("organizationName")) || wordsList.get(i).getType() == null)) {
-				wordsList.get(i).setType("cityName");
-				wordsList.get(i).setSubType("city");
+			if (exist && (( wordsList.get(i).getType() != null && !wordsList.get(i).getType().equals(WordType.LOCATION)
+					&& !wordsList.get(i).getType().equals(WordType.ORGANIZATION)) || wordsList.get(i).getType() == null)) {
+				wordsList.get(i).setType(WordType.CITY);
+				wordsList.get(i).setSubType(WordType.CITY);
 			}
 		}
 
