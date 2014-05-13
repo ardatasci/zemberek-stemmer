@@ -4,6 +4,7 @@ import KeywordAugmentation.Freebase.MQLAPI.FreebaseTVProgramRequest;
 import KeywordAugmentation.Freebase.SearchAPI.FreebaseProgramSearchRequest;
 import KeywordExtraction.DBPediaSptlight.AnnotatedKeyword;
 import KeywordExtraction.DBPediaSptlight.DBPediaSpotlight;
+import KeywordExtraction.NamedEntityTurkish.AnnotatedWordListCreator;
 import KeywordExtraction.NamedEntityTurkish.ModifiedListCreator;
 import KeywordExtraction.NamedEntityTurkish.SentenceCreator;
 import ResourceCollection.DigiturkEPG.EPGStatisticalExtraction;
@@ -59,12 +60,14 @@ public class Main {
 		}*/
 		
 		SentenceCreator sentenceCreater = new SentenceCreator();
-		sentenceCreater.createSentenceBySentenceText("input.txt", "sentenceBySentence.txt");
+		//sentenceCreater.createSentenceBySentenceText("input.txt", "sentenceBySentence.txt");
+		sentenceCreater.extractSentencesFromText("short_input.txt", "sentenceBySentence.txt");
 		int[] wantedEntities = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 		String outputType = "TXT";
 		ModifiedListCreator modifiedListCreator = new ModifiedListCreator();
 		modifiedListCreator.createModifiedLitst(wantedEntities, outputType);
-		modifiedListCreator.printWordListToFile();
+		System.out.println(AnnotatedWordListCreator.getInstance().getTotalSentenceSize());
+		//modifiedListCreator.printWordListToFile();
  
 	}
 	

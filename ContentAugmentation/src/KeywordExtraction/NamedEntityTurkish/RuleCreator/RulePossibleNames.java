@@ -31,10 +31,6 @@ public class RulePossibleNames extends Rule{
 
 			clearedContent = wordsList.get(i).getClearedContent();
 
-			if (clearedContent.equals("gaZipaşa")) {
-				System.out.println("gaaaaaaaa");
-			}
-
 			for (int j = 0; j < clearedContent.length(); j++) {
 				for (int k = 0; k < capitalLetters.length; k++) {
 					if ((clearedContent.substring(j, j + 1))
@@ -60,6 +56,13 @@ public class RulePossibleNames extends Rule{
 
 		return modifiedWordsList;
 
+	}
+
+	@Override
+	void findEntitiesInDictionary(ArrayList<Word> wordsList,
+			ArrayList<String> entities, WordType entityType, int sentenceNumber) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	/*public ArrayList<Word> determinePossibleNames(ArrayList<Word> wordsList) {

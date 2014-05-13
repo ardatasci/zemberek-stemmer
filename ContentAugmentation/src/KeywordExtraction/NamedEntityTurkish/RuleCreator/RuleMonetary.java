@@ -149,4 +149,11 @@ public class RuleMonetary extends Rule{
 		return modifiedWordsList;
 
 	}
+
+	@Override
+	void findEntitiesInDictionary(ArrayList<Word> wordsList,
+			ArrayList<String> entities, WordType entityType, int sentenceNumber) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -15,6 +15,7 @@ public class Word {
 	String[] punctuation = {"\"", ":", ".", ",", "’"};
 	String[] reagent = {"\'", "’", "’", "(", ")"};
 	boolean punctiationFound = false;
+	private int position;
 	
 	public Word(){
 		
@@ -117,6 +118,12 @@ public class Word {
 		}
 		
 		
+	}
+	public int getPosition() {
+		return position;
+	}
+	public void setPosition(int position) {
+		this.position = position;
 	}
 
 }

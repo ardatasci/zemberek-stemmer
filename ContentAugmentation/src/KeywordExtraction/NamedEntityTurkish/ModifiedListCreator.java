@@ -20,6 +20,7 @@ public class ModifiedListCreator {
 
 	int[] wantedEntities;
 	String outputType = "";
+	int sentenceNumber = 0;
 
 	public ModifiedListCreator() {
 
@@ -39,6 +40,7 @@ public class ModifiedListCreator {
 		outputWriter.deleteContent(outputType);
 
 		while (in.inputAvailable()) {
+			sentenceNumber++;
 			line = in.readLine();
 			StringTokenizer token = new StringTokenizer(line);
 			while (token.hasMoreTokens()) {
@@ -50,7 +52,7 @@ public class ModifiedListCreator {
 
 			}
 			modifiedWordsList = entityFinder.findEntities(wantedEntities,
-					wordsList);
+					wordsList, sentenceNumber);
 			allWordList.addAll(modifiedWordsList);
 			outputWriter.writeToFile(modifiedWordsList, outputType);
 			wordsList.clear();

@@ -9,5 +9,10 @@
 	<classpathentry kind="lib" path="lib/json-simple-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/java-json.jar"/>
 	<classpathentry kind="lib" path="/home/arcelik/Desktop/Master_Thesis/kaynak_kodu/zemberek-stemmer/ContentAugmentation/lib/minio-bin-0.9.1.jar"/>
+	<classpathentry kind="lib" path="/home/arcelik/Desktop/Master_Thesis/kaynak_kodu/zemberek-stemmer/ContentAugmentation/lib/antlr4-runtime-4.0.1z.jar"/>
+	<classpathentry kind="lib" path="/home/arcelik/Desktop/Master_Thesis/kaynak_kodu/zemberek-stemmer/ContentAugmentation/lib/guava-15.0.jar"/>
+	<classpathentry kind="lib" path="/home/arcelik/Desktop/Master_Thesis/kaynak_kodu/zemberek-stemmer/ContentAugmentation/lib/zemberek-tokenization-0.9.0.jar"/>
+	<classpathentry kind="lib" path="/home/arcelik/Desktop/Master_Thesis/kaynak_kodu/zemberek-stemmer/ContentAugmentation/lib/zemberek-cekirdek-2.1.1.jar"/>
+	<classpathentry kind="lib" path="/home/arcelik/Desktop/Master_Thesis/kaynak_kodu/zemberek-stemmer/ContentAugmentation/lib/zemberek-tr-2.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

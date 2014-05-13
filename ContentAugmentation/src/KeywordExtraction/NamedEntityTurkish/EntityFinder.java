@@ -47,7 +47,7 @@ public class EntityFinder {
 		
 	}
 	
-	public ArrayList<Word> findEntities (int[] wantedEntities, ArrayList<Word> wordsList)
+	public ArrayList<Word> findEntities (int[] wantedEntities, ArrayList<Word> wordsList, int sentenceNumber)
 	{
 		this.wantedEntities = wantedEntities;
 		this.wordsList = wordsList;
@@ -93,7 +93,7 @@ public class EntityFinder {
 			modifiedWordsList = ruleCityName.containsCityName(modifiedWordsList);
 		}
 		if (wantedEntities[8] == 1) {
-			modifiedWordsList = ruleCountryName.containsCountryName(modifiedWordsList);
+			modifiedWordsList = ruleCountryName.containsCountryName(modifiedWordsList, sentenceNumber);
 		}
 		if (wantedEntities[9] == 1) {
 			modifiedWordsList = ruleContinentName.containsContinentName(modifiedWordsList);
@@ -101,15 +101,15 @@ public class EntityFinder {
 		if (wantedEntities[10] == 1) {
 			modifiedWordsList = ruleOrganizationName.containsOrganizationName(modifiedWordsList);
 		}
-		for (Word word : modifiedWordsList) {
-			System.out.println(word.getContent() + "--++" + word.getType());
-		}
+//		for (Word word : modifiedWordsList) {
+//			System.out.println(word.getContent() + "--++" + word.getType());
+//		}
 		if (wantedEntities[11] == 1) {
-			modifiedWordsList = rulePersonName.containsPersonName(modifiedWordsList);
+			modifiedWordsList = rulePersonName.containsPersonName(modifiedWordsList, sentenceNumber);
 		}
-		for (Word word : modifiedWordsList) {
-			System.out.println(word.getContent() + "--++" + word.getType());
-		}
+//		for (Word word : modifiedWordsList) {
+//			System.out.println(word.getContent() + "--++" + word.getType());
+//		}
 
 		return modifiedWordsList;
 		
