@@ -90,7 +90,7 @@ public class EntityFinder {
 			modifiedWordsList = ruleLocationName.containsLocationName(modifiedWordsList);
 		}
 		if (wantedEntities[7] == 1) {
-			modifiedWordsList = ruleCityName.containsCityName(modifiedWordsList);
+			modifiedWordsList = ruleCityName.containsCityName(modifiedWordsList, sentenceNumber);
 		}
 		if (wantedEntities[8] == 1) {
 			modifiedWordsList = ruleCountryName.containsCountryName(modifiedWordsList, sentenceNumber);

@@ -2,6 +2,7 @@ package KeywordExtraction.NamedEntityTurkish.RuleCreator;
 
 import java.util.ArrayList;
 
+import KeywordExtraction.NamedEntityTurkish.AnnotatedWordListCreator;
 import KeywordExtraction.NamedEntityTurkish.Word;
 import KeywordExtraction.NamedEntityTurkish.enums.WordType;
 
@@ -61,6 +62,8 @@ public class RuleAbbreviation extends Rule{
 			if (!notAbbreviation)
 			{
 				wordsList.get(i).setType(WordType.ABBREVIATION);
+				if(!wordsList.get(i).getClearedContent().equals(""))
+					AnnotatedWordListCreator.getInstance().addAnnotatedWord(wordsList.get(i));
 			}
 			capitalLetterFound = false;
 			notAbbreviation = false;

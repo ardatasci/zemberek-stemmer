@@ -113,18 +113,26 @@ public class SentenceCreator {
 
 	}
 
-	public void extractSentencesFromText(String infile, String outfile) throws IOException {
+	public void extractSentencesFromText(String infile, String outfile)
+			throws IOException {
 		SimpleSentenceBoundaryDetector splitter = new SimpleSentenceBoundaryDetector();
 		MinioReader in = MinioReader.getFileReader(infile);
 		MinioWriter out = MinioWriter.getFileWriter(outfile);
 		File file = new File(infile);
 		List<String> list = splitter.getSentences(file);
-		
+
+		int listSize = list.size();
 		for (String string : list) {
 			out.println(string);
 		}
-		AnnotatedWordListCreator.getInstance().setTotalSentenceSize(
-				list.size());
+		if (list.get(listSize - 1).length() == 0) {
+			AnnotatedWordListCreator.getInstance().setTotalSentenceSize(
+					listSize - 1);
+		} else {
+			AnnotatedWordListCreator.getInstance().setTotalSentenceSize(
+					listSize);
+		}
+
 		out.close();
 	}
 }

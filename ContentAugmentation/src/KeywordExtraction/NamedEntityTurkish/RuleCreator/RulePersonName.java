@@ -19,7 +19,6 @@ public class RulePersonName extends Rule {
 	ArrayList<Word> wordsList = new ArrayList<Word>();
 	ArrayList<Word> modifiedWordsList = new ArrayList<Word>();
 	ArrayList<Word> preFoundPersonList = new ArrayList<Word>();
-	Zemberek zemberek;
 	String clearedContent = "";
 	String content = "";
 
@@ -27,7 +26,6 @@ public class RulePersonName extends Rule {
 	boolean postNounFound = false;
 
 	public RulePersonName() {
-		zemberek = new Zemberek(new TurkiyeTurkcesi());
 		MinioReader fileReader = MinioReader
 				.getFileReader("res/person_dictionary");
 		while (fileReader.inputAvailable()) {
@@ -200,11 +198,11 @@ public class RulePersonName extends Rule {
 			// if(i==1){
 			// punctiationFound = false;
 			// }
-			CozumlemeSeviyesi strateji=CozumlemeSeviyesi.TUM_KOK_VE_EKLER;
 			Kelime[] kelimeler = zemberek.kelimeCozumle(wordsList.get(i).getContent(), strateji);
-			for (Kelime kelime2 : kelimeler) {
-				System.out.println(kelime2.kok());
-			}
+//			for (Kelime kelime2 : kelimeler) {
+//				if(kelime2.kok().icerik().equals("işletme"))
+//					System.out.println(kelime2.kok());
+//			}
 			
 			namedEntityFound = false;
 			wordsList.get(i).cleareContent();

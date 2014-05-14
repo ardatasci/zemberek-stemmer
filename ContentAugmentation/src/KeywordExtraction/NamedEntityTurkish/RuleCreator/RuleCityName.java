@@ -24,9 +24,11 @@ public class RuleCityName extends Rule {
 		fileReader.close();
 	}
 
-	public ArrayList<Word> containsCityName(ArrayList<Word> wordsList) {
+	public ArrayList<Word> containsCityName(ArrayList<Word> wordsList, int sentenceNumber) {
 		this.wordsList = wordsList;
 		// XXX -- ici doldurulacak
+		
+		findEntitiesInDictionary(wordsList, cities, WordType.CITY, sentenceNumber);
 
 		for (int i = 0; i < wordsList.size(); i++) {
 			wordsList.get(i).cleareContent();
@@ -49,7 +51,23 @@ public class RuleCityName extends Rule {
 	@Override
 	void findEntitiesInDictionary(ArrayList<Word> wordsList,
 			ArrayList<String> entities, WordType entityType, int sentenceNumber) {
-		// TODO Auto-generated method stub
+		String sentence = "";
+		for (int i = 0; i < wordsList.size(); i++){
+			wordsList.get(i).cleareContent(); 
+			sentence = sentence + " " + wordsList.get(i).getClearedContent();
+		}
+		
+		for(int i=0; i< entities.size(); i++){
+			if (sentence.contains(entities.get(i))) {
+				Word word = new Word();
+				word.setClearedContent(entities.get(i));
+				word.setContent(entities.get(i));
+				word.setType(entityType);
+				word.setPosition(sentenceNumber*(i+1));
+				annotatedWordListCreator.addAnnotatedWord(word);
+				//word listesinde tek tek bulunan bu ülke isimlerinin tipini set et
+			}	
+		}
 		
 	}
 }
