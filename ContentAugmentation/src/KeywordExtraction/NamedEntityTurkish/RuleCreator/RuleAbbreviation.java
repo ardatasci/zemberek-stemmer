@@ -21,7 +21,7 @@ public class RuleAbbreviation extends Rule{
 	}
 	
 	
-	public ArrayList<Word> containsAbbreviation(ArrayList<Word> wordsList)
+	public ArrayList<Word> containsAbbreviation(ArrayList<Word> wordsList, int sentenceNumber)
 	{
 		this.wordsList = wordsList;
 		// XXX -- ici doldurulacak
@@ -62,8 +62,11 @@ public class RuleAbbreviation extends Rule{
 			if (!notAbbreviation)
 			{
 				wordsList.get(i).setType(WordType.ABBREVIATION);
-				if(!wordsList.get(i).getClearedContent().equals(""))
+				if(!wordsList.get(i).getClearedContent().equals("")){
+					wordsList.get(i).setSentenceNumber(sentenceNumber);
 					AnnotatedWordListCreator.getInstance().addAnnotatedWord(wordsList.get(i));
+				}
+					
 			}
 			capitalLetterFound = false;
 			notAbbreviation = false;

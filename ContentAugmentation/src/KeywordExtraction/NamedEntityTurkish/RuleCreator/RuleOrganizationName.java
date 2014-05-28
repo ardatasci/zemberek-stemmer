@@ -28,7 +28,7 @@ public class RuleOrganizationName extends Rule {
 		fileReader.close();
 	}
 
-	public ArrayList<Word> containsOrganizationName(ArrayList<Word> wordsList) {
+	public ArrayList<Word> containsOrganizationName(ArrayList<Word> wordsList, int sentenceNumber) {
 		this.wordsList = wordsList;
 
 		boolean organizationPostFixesFound = false;
@@ -43,7 +43,8 @@ public class RuleOrganizationName extends Rule {
 			if (wordsList.get(i).getType() != null) {
 				if (wordsList.get(i).getType().equals(WordType.POSSIBLE)
 						|| wordsList.get(i).getType().equals(WordType.CITY)
-						|| wordsList.get(i).getType().equals(WordType.COUNTRY)) {
+						|| wordsList.get(i).getType().equals(WordType.COUNTRY)
+						|| wordsList.get(i).getType().equals(WordType.PERSON)) {
 					possibleOrganizationFound = true;
 					if (organizationToBeAdded.equals(""))
 						organizationToBeAdded = wordsList.get(i)
@@ -89,7 +90,7 @@ public class RuleOrganizationName extends Rule {
 					word.setClearedContent(organizationToBeAdded);
 					word.setContent(organizationToBeAdded);
 					word.setType(WordType.ORGANIZATION);
-					// word.setPosition(sentenceNumber * (i + 1));
+					word.setSentenceNumber(sentenceNumber);
 					annotatedWordListCreator.addAnnotatedWord(word);
 					organizationPostFixesFound = false;
 					possibleOrganizationFound = false;

@@ -101,15 +101,26 @@ public class RuleCountryName extends Rule{
 		}
 		
 		for(int i=0; i< entities.size(); i++){
-			if (sentence.contains(entities.get(i))) {
+//			if (sentence.contains(entities.get(i))) {
+//				Word word = new Word();
+//				word.setClearedContent(entities.get(i));
+//				word.setContent(entities.get(i));
+//				word.setType(entityType);
+//				word.setSentenceNumber(sentenceNumber);
+//				annotatedWordListCreator.addAnnotatedWord(word);
+//				//word listesinde tek tek bulunan bu ülke isimlerinin tipini set et
+//			}	
+			
+			int indexInSentence = sentence.indexOf(entities.get(i));
+			while (indexInSentence >= 0) {
 				Word word = new Word();
 				word.setClearedContent(entities.get(i));
 				word.setContent(entities.get(i));
 				word.setType(entityType);
-				word.setPosition(sentenceNumber*(i+1));
+				word.setSentenceNumber(sentenceNumber);
 				annotatedWordListCreator.addAnnotatedWord(word);
-				//word listesinde tek tek bulunan bu ülke isimlerinin tipini set et
-			}	
+			    indexInSentence = sentence.indexOf(entities.get(i), indexInSentence + 1);
+			}
 		}
 		
 	}

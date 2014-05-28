@@ -35,5 +35,6 @@ public class AnnotatedWordListCreator {
 	public void setTotalSentenceSize(int totalSentenceSize) {
 		this.totalSentenceSize = totalSentenceSize;
 	}
+	
 
 }

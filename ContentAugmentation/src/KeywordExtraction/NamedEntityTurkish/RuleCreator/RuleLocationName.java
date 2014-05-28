@@ -27,7 +27,7 @@ public class RuleLocationName extends Rule{
 		fileReader.close();
 	}
 
-	public ArrayList<Word> containsLocationName(ArrayList<Word> wordsList) {
+	public ArrayList<Word> containsLocationName(ArrayList<Word> wordsList, int sentenceNumber) {
 		this.wordsList = wordsList;
 		
 		boolean locationPostFixesFound = false;
@@ -42,7 +42,8 @@ public class RuleLocationName extends Rule{
 			if (wordsList.get(i).getType() != null) {
 				if (wordsList.get(i).getType().equals(WordType.POSSIBLE)
 						|| wordsList.get(i).getType().equals(WordType.CITY)
-						|| wordsList.get(i).getType().equals(WordType.COUNTRY)) {
+						|| wordsList.get(i).getType().equals(WordType.COUNTRY)
+						|| wordsList.get(i).getType().equals(WordType.PERSON)) {
 					possibleLocationFound = true;
 					if (locationToBeAdded.equals(""))
 						locationToBeAdded = wordsList.get(i)
@@ -88,7 +89,7 @@ public class RuleLocationName extends Rule{
 					word.setClearedContent(locationToBeAdded);
 					word.setContent(locationToBeAdded);
 					word.setType(WordType.LOCATION);
-					// word.setPosition(sentenceNumber * (i + 1));
+					word.setSentenceNumber(sentenceNumber);
 					annotatedWordListCreator.addAnnotatedWord(word);
 					locationPostFixesFound = false;
 					possibleLocationFound = false;

@@ -52,21 +52,57 @@ public class RuleCityName extends Rule {
 	void findEntitiesInDictionary(ArrayList<Word> wordsList,
 			ArrayList<String> entities, WordType entityType, int sentenceNumber) {
 		String sentence = "";
-		for (int i = 0; i < wordsList.size(); i++){
+		/*for (int i = 0; i < wordsList.size(); i++){
 			wordsList.get(i).cleareContent(); 
 			sentence = sentence + " " + wordsList.get(i).getClearedContent();
 		}
 		
 		for(int i=0; i< entities.size(); i++){
-			if (sentence.contains(entities.get(i))) {
+//			if (sentence.contains(entities.get(i))) {
+//			if (sentence.equals(entities.get(i))) {
+
+//				//word.setIndexInSentence(indexInSentence);
+//				annotatedWordListCreator.addAnnotatedWord(word);
+//				//word listesinde tek tek bulunan bu ülke isimlerinin tipini set et
+//			}	
+			
+			int indexInSentence = sentence.indexOf(entities.get(i));
+			while (indexInSentence >= 0) {
 				Word word = new Word();
 				word.setClearedContent(entities.get(i));
 				word.setContent(entities.get(i));
 				word.setType(entityType);
-				word.setPosition(sentenceNumber*(i+1));
+				word.setSentenceNumber(sentenceNumber);
 				annotatedWordListCreator.addAnnotatedWord(word);
-				//word listesinde tek tek bulunan bu ülke isimlerinin tipini set et
-			}	
+			    indexInSentence = sentence.indexOf(entities.get(i), indexInSentence + 1);
+			}
+		}*/
+		
+		for (int i = 0; i < wordsList.size(); i++) {
+			
+			wordsList.get(i).cleareContent();
+			String processedContent = wordsList.get(i).getClearedContent();
+			String nonProcessedcontent = wordsList.get(i).getContent();
+
+			for (int j = 0; j < entities.size(); j++) {
+
+				if (processedContent.equals(entities.get(j))) {
+					if (!wordsList.get(i).getType()
+									.equals(WordType.COUNTRY) && !wordsList
+									.get(i).getType().equals(WordType.LOCATION)) {
+						wordsList.get(i).setType(WordType.CITY);
+						Word word = new Word();
+						word.setClearedContent(processedContent);
+						word.setContent(processedContent);
+						word.setType(entityType);
+						word.setSentenceNumber(sentenceNumber);
+						annotatedWordListCreator.addAnnotatedWord(word);
+
+					}
+
+				}
+
+			}
 		}
 		
 	}

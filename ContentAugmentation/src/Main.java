@@ -7,6 +7,7 @@ import KeywordExtraction.DBPediaSptlight.DBPediaSpotlight;
 import KeywordExtraction.NamedEntityTurkish.AnnotatedWordListCreator;
 import KeywordExtraction.NamedEntityTurkish.ModifiedListCreator;
 import KeywordExtraction.NamedEntityTurkish.SentenceCreator;
+import KeywordExtraction.NamedEntityTurkish.util.UtilFunctions;
 import ResourceCollection.DigiturkEPG.EPGStatisticalExtraction;
 
 
@@ -58,6 +59,9 @@ public class Main {
 			System.out.println(mid);
 			System.out.println(programRequest.findActorsbyMid(mid));	
 		}*/
+		
+		//UtilFunctions utilFunctions = new UtilFunctions();
+		//utilFunctions.removeDuplicatesInResource("res/cities");
 		
 		SentenceCreator sentenceCreater = new SentenceCreator();
 		//sentenceCreater.createSentenceBySentenceText("input.txt", "sentenceBySentence.txt");

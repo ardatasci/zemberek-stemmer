@@ -64,30 +64,30 @@ public class EntityFinder {
 		//modifiedWordsList = rulePossibleNames.determinePossibleNames(wordsList);
 
 			
-		
+
 		if (wantedEntities[0] == 1) {
-			modifiedWordsList = ruleAbbreviation.containsAbbreviation(wordsList);
+			modifiedWordsList = ruleAbbreviation.containsAbbreviation(wordsList, sentenceNumber);
 		}
 		if (wantedEntities[1] == 1) {
-			modifiedWordsList = ruleDate.containsDate(modifiedWordsList);
+			//modifiedWordsList = ruleDate.containsDate(modifiedWordsList);
 		}
 		if (wantedEntities[2] == 1) {
-			modifiedWordsList = ruleTime.containsTime(modifiedWordsList);
+			//modifiedWordsList = ruleTime.containsTime(modifiedWordsList);
 		}
 		if (wantedEntities[4] == 1) {
-			modifiedWordsList = rulePercentage.containsPercentage(modifiedWordsList);
+			//modifiedWordsList = rulePercentage.containsPercentage(modifiedWordsList);
 		}
 		if (wantedEntities[5] == 1) {
-			modifiedWordsList = ruleQuantity.containsQuantity(modifiedWordsList);
+			//modifiedWordsList = ruleQuantity.containsQuantity(modifiedWordsList);
 		}
 		if (wantedEntities[3] == 1) {
-			modifiedWordsList = ruleMonetary.containsMonetary(modifiedWordsList);
+			//modifiedWordsList = ruleMonetary.containsMonetary(modifiedWordsList);
 		}
 		
 		//modifiedWordsList = ruleCategorizeNames.containsCategorizedNames(wordsList);
 		
 		if (wantedEntities[6] == 1) {
-			modifiedWordsList = ruleLocationName.containsLocationName(modifiedWordsList);
+			modifiedWordsList = ruleLocationName.containsLocationName(modifiedWordsList, sentenceNumber);
 		}
 		if (wantedEntities[7] == 1) {
 			modifiedWordsList = ruleCityName.containsCityName(modifiedWordsList, sentenceNumber);
@@ -96,17 +96,20 @@ public class EntityFinder {
 			modifiedWordsList = ruleCountryName.containsCountryName(modifiedWordsList, sentenceNumber);
 		}
 		if (wantedEntities[9] == 1) {
-			modifiedWordsList = ruleContinentName.containsContinentName(modifiedWordsList);
+			//modifiedWordsList = ruleContinentName.containsContinentName(modifiedWordsList);
 		}
 		if (wantedEntities[10] == 1) {
-			modifiedWordsList = ruleOrganizationName.containsOrganizationName(modifiedWordsList);
+			modifiedWordsList = ruleOrganizationName.containsOrganizationName(modifiedWordsList, sentenceNumber);
+		}
+		if (wantedEntities[11] == 1) {
+			modifiedWordsList = rulePersonName.containsPersonName(modifiedWordsList, sentenceNumber);
 		}
 //		for (Word word : modifiedWordsList) {
 //			System.out.println(word.getContent() + "--++" + word.getType());
 //		}
-		if (wantedEntities[11] == 1) {
-			modifiedWordsList = rulePersonName.containsPersonName(modifiedWordsList, sentenceNumber);
-		}
+//		if (wantedEntities[11] == 1) {
+//			modifiedWordsList = rulePersonName.containsPersonName(modifiedWordsList, sentenceNumber);
+//		}
 //		for (Word word : modifiedWordsList) {
 //			System.out.println(word.getContent() + "--++" + word.getType());
 //		}

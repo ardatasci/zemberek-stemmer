@@ -1,5 +1,7 @@
 package KeywordExtraction.NamedEntityTurkish;
 
+import java.util.ArrayList;
+
 import KeywordExtraction.NamedEntityTurkish.enums.WordType;
 
 public class Word {
@@ -11,14 +13,15 @@ public class Word {
 	//String type = null;
 	WordType type = null;
 	WordType subType = null;
-	
+	private ArrayList<WordType> otherTypes = null;
 	String[] punctuation = {"\"", ":", ".", ",", "’"};
 	String[] reagent = {"\'", "’", "’", "(", ")"};
 	boolean punctiationFound = false;
-	private int position;
-	
+	private int sentenceNumber; // bulunan named entity leri output olarak basarken kullanılacak
+	private int indexInSentence;
+	private int lastIndexInSentence;
 	public Word(){
-		
+		otherTypes = new ArrayList<>();
 	}
 	public Word(String content)
 	{
@@ -119,11 +122,29 @@ public class Word {
 		
 		
 	}
-	public int getPosition() {
-		return position;
+	public int getSentenceNumber() {
+		return sentenceNumber;
 	}
-	public void setPosition(int position) {
-		this.position = position;
+	public void setSentenceNumber(int sentenceNumber) {
+		this.sentenceNumber = sentenceNumber;
+	}
+	public int getIndexInSentence() {
+		return indexInSentence;
+	}
+	public void setIndexInSentence(int indexInSentence) {
+		this.indexInSentence = indexInSentence;
+	}
+	public ArrayList<WordType> getOtherTypes() {
+		return otherTypes;
+	}
+	public void setOtherTypes(ArrayList<WordType> otherTypes) {
+		this.otherTypes = otherTypes;
+	}
+	public int getLastIndexInSentence() {
+		return lastIndexInSentence;
+	}
+	public void setLastIndexInSentence(int lastIndexInSentence) {
+		this.lastIndexInSentence = lastIndexInSentence;
 	}
 
 }

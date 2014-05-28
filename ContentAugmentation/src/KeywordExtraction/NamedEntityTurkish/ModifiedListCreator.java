@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import KeywordExtraction.NamedEntityTurkish.enums.WordType;
+import KeywordExtraction.NamedEntityTurkish.util.UtilFunctions;
 
 import tr.edu.hacettepe.cs.minio.MinioReader;
 
@@ -54,7 +55,8 @@ public class ModifiedListCreator {
 			modifiedWordsList = entityFinder.findEntities(wantedEntities,
 					wordsList, sentenceNumber);
 			allWordList.addAll(modifiedWordsList);
-			outputWriter.writeToFile(modifiedWordsList, outputType);
+			//outputWriter.writeToFile(modifiedWordsList, outputType);
+			outputWriter.writeToFile(AnnotatedWordListCreator.getInstance().getAnnotatedWordList(), outputType);
 			wordsList.clear();
 		}
 		in.close();
@@ -63,6 +65,7 @@ public class ModifiedListCreator {
 		try {
 			utilFunctions.writeWordsToFile("AnnotatedWords.txt", namedEntityWordList);
 			utilFunctions.writeWordsToFile("AllWords.txt", allWordList);
+			utilFunctions.writeMyModifiedOutputToFile("MyModifiedOutput.txt", AnnotatedWordListCreator.getInstance().getAnnotatedWordList());
 			utilFunctions.writeWordsToFile("MyAnnotatedWords.txt", AnnotatedWordListCreator.getInstance().getAnnotatedWordList());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
