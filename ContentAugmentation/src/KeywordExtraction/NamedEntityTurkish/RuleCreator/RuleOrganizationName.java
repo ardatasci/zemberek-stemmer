@@ -28,7 +28,8 @@ public class RuleOrganizationName extends Rule {
 		fileReader.close();
 	}
 
-	public ArrayList<Word> containsOrganizationName(ArrayList<Word> wordsList, int sentenceNumber) {
+	public ArrayList<Word> containsOrganizationName(ArrayList<Word> wordsList,
+			int sentenceNumber) {
 		this.wordsList = wordsList;
 
 		boolean organizationPostFixesFound = false;
@@ -39,49 +40,67 @@ public class RuleOrganizationName extends Rule {
 			wordsList.get(i).cleareContent();
 
 			clearedContent = wordsList.get(i).getClearedContent();
-
-			if (wordsList.get(i).getType() != null) {
-				if (wordsList.get(i).getType().equals(WordType.POSSIBLE)
-						|| wordsList.get(i).getType().equals(WordType.CITY)
-						|| wordsList.get(i).getType().equals(WordType.COUNTRY)
-						|| wordsList.get(i).getType().equals(WordType.PERSON)) {
-					possibleOrganizationFound = true;
-					if (organizationToBeAdded.equals(""))
-						organizationToBeAdded = wordsList.get(i)
-								.getClearedContent();
-					else
-						organizationToBeAdded += " "
-								+ wordsList.get(i).getClearedContent();
-				}
-			}
-			else{
-				possibleOrganizationFound = false;
-				organizationToBeAdded = "";
-			}
+//			Kelime[] kelimeler = zemberek.kelimeCozumle(wordsList.get(i)
+//					.getContent(), strateji);
+			Kelime[] kelimeler = zemberek.kelimeCozumle(clearedContent, strateji);
 
 			for (String organizationPostfix : organizationPostfixes) {
 				// if (clearedContent.startsWith(organizationPostfix)) {
 				// organizationPostFixesFound = true;
 				// }
-				Kelime[] kelimeler = zemberek.kelimeCozumle(wordsList.get(i)
-						.getContent(), strateji);
+
 				for (Kelime kelime2 : kelimeler) {
 					if (kelime2.kok().icerik().equals(organizationPostfix)) {
-						organizationPostFixesFound = true;
+						// organizationPostFixesFound = true;
 						// System.out.println(kelime2.kok());
-						if(!organizationToBeAdded.equals("")){
+						if (!organizationToBeAdded.equals("")) {
 							String[] splited = organizationToBeAdded.split(" ");
-							if (splited.length == 1) {
+							if (splited.length == 0) {
 								organizationPostFixesFound = false;
 								possibleOrganizationFound = false;
 								organizationToBeAdded = "";
-							}
+								
+							} else
+								organizationPostFixesFound = true;
 						}
 						break;
 
 					}
 
 				}
+			}
+			// && !wordsList.get(i).isLastElementAPunctuation() &&
+			// (possibleOrganizationFound && wordsList.get(i).getAffix() !=
+			// null))
+			if (wordsList.get(i).getType() != null) {
+				if (wordsList.get(i).isLastElementAPunctuation()
+						&& !organizationPostFixesFound) {
+					possibleOrganizationFound = false;
+					organizationToBeAdded = "";
+				}
+				else if(wordsList.get(i).getAffix() != null  &&!organizationPostFixesFound){
+					possibleOrganizationFound = false;
+					organizationToBeAdded = "";
+				}
+				else {
+					if (wordsList.get(i).getType().equals(WordType.POSSIBLE)
+							|| wordsList.get(i).getType().equals(WordType.CITY)
+							|| wordsList.get(i).getType()
+									.equals(WordType.COUNTRY)
+							|| wordsList.get(i).getType()
+									.equals(WordType.PERSON)) {
+						possibleOrganizationFound = true;
+						if (organizationToBeAdded.equals(""))
+							organizationToBeAdded = wordsList.get(i)
+									.getClearedContent();
+						else
+							organizationToBeAdded += " "
+									+ wordsList.get(i).getClearedContent();
+					}
+				}
+			} else {
+				possibleOrganizationFound = false;
+				organizationToBeAdded = "";
 			}
 
 			if (organizationPostFixesFound) {
@@ -96,54 +115,10 @@ public class RuleOrganizationName extends Rule {
 					possibleOrganizationFound = false;
 					organizationToBeAdded = "";
 				}
-			}
-			else if(!possibleOrganizationFound){
+			} else if (!possibleOrganizationFound) {
 				organizationToBeAdded = "";
 			}
 
-			// if (organizationPostFixesFound) {
-			// wordsList.get(i).setType(WordType.ORGANIZATION);
-			// try {
-			// int k = 1;
-			//
-			// while ((wordsList.get(i - k).getType())
-			// .equals(WordType.POSSIBLE)
-			// || (wordsList.get(i - k).getType())
-			// .equals(WordType.CITY)
-			// || (wordsList.get(i - k).getType())
-			// .equals(WordType.ORGANIZATION)) {
-			// if (wordsList
-			// .get(i - k)
-			// .getContent()
-			// .substring(
-			// wordsList.get(i - k).getContent()
-			// .length() - 2,
-			// wordsList.get(i - k).getContent()
-			// .length() - 1).equals(",")) {
-			// break;
-			// }
-			// if (wordsList
-			// .get(i - k)
-			// .getContent()
-			// .substring(
-			// 0,
-			// wordsList.get(i - k).getContent()
-			// .length() - 1)
-			// .equals(wordsList.get(i - k)
-			// .getClearedContent())) {
-			// wordsList.get(i - k).setType(WordType.ORGANIZATION);
-			//
-			// }
-			// // wordsList.get(i-k).setType("organizationName");
-			// k++;
-			// }
-			//
-			// } catch (Exception e) {
-			// // TODO: handle exception
-			// }
-			// organizationPostFixesFound = false;
-			// }
-			//
 		}
 		modifiedWordsList = wordsList;
 

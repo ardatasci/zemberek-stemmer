@@ -13,6 +13,8 @@ public class Word {
 	//String type = null;
 	WordType type = null;
 	WordType subType = null;
+	private String wikiText = "";
+	
 	private ArrayList<WordType> otherTypes = null;
 	String[] punctuation = {"\"", ":", ".", ",", "’"};
 	String[] reagent = {"\'", "’", "’", "(", ")"};
@@ -145,6 +147,20 @@ public class Word {
 	}
 	public void setLastIndexInSentence(int lastIndexInSentence) {
 		this.lastIndexInSentence = lastIndexInSentence;
+	}
+	public boolean isLastElementAPunctuation(){
+		String lastElement = content.substring(content.length()-2, content.length()-1);
+		if(lastElement.equals(",") || lastElement.equals(";")){
+			return true;
+		}
+		else
+			return false;
+	}
+	public String getWikiText() {
+		return wikiText;
+	}
+	public void setWikiText(String wikiText) {
+		this.wikiText = wikiText;
 	}
 
 }

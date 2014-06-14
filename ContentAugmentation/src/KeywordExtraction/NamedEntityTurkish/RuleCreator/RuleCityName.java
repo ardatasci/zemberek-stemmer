@@ -52,31 +52,6 @@ public class RuleCityName extends Rule {
 	void findEntitiesInDictionary(ArrayList<Word> wordsList,
 			ArrayList<String> entities, WordType entityType, int sentenceNumber) {
 		String sentence = "";
-		/*for (int i = 0; i < wordsList.size(); i++){
-			wordsList.get(i).cleareContent(); 
-			sentence = sentence + " " + wordsList.get(i).getClearedContent();
-		}
-		
-		for(int i=0; i< entities.size(); i++){
-//			if (sentence.contains(entities.get(i))) {
-//			if (sentence.equals(entities.get(i))) {
-
-//				//word.setIndexInSentence(indexInSentence);
-//				annotatedWordListCreator.addAnnotatedWord(word);
-//				//word listesinde tek tek bulunan bu ülke isimlerinin tipini set et
-//			}	
-			
-			int indexInSentence = sentence.indexOf(entities.get(i));
-			while (indexInSentence >= 0) {
-				Word word = new Word();
-				word.setClearedContent(entities.get(i));
-				word.setContent(entities.get(i));
-				word.setType(entityType);
-				word.setSentenceNumber(sentenceNumber);
-				annotatedWordListCreator.addAnnotatedWord(word);
-			    indexInSentence = sentence.indexOf(entities.get(i), indexInSentence + 1);
-			}
-		}*/
 		
 		for (int i = 0; i < wordsList.size(); i++) {
 			

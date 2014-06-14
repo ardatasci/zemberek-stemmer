@@ -61,11 +61,14 @@ public class RuleAbbreviation extends Rule{
 			
 			if (!notAbbreviation)
 			{
-				wordsList.get(i).setType(WordType.ABBREVIATION);
-				if(!wordsList.get(i).getClearedContent().equals("")){
-					wordsList.get(i).setSentenceNumber(sentenceNumber);
-					AnnotatedWordListCreator.getInstance().addAnnotatedWord(wordsList.get(i));
+				if(wordsList.get(i).getClearedContent().length() > 1){
+					wordsList.get(i).setType(WordType.ABBREVIATION);
+					if(!wordsList.get(i).getClearedContent().equals("")){
+						wordsList.get(i).setSentenceNumber(sentenceNumber);
+						AnnotatedWordListCreator.getInstance().addAnnotatedWord(wordsList.get(i));
+					}
 				}
+
 					
 			}
 			capitalLetterFound = false;

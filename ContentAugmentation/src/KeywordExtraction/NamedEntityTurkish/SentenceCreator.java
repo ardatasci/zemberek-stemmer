@@ -135,4 +135,27 @@ public class SentenceCreator {
 
 		out.close();
 	}
+
+	public void extractSentencesFromWindowTextField(String text, String outfile)
+			throws IOException {
+		SimpleSentenceBoundaryDetector splitter = new SimpleSentenceBoundaryDetector();
+		MinioWriter out = MinioWriter.getFileWriter(outfile);
+		List<String> list = splitter.getSentences(text);
+
+		int listSize = list.size();
+		if (listSize != 0) {
+			for (String string : list) {
+				out.println(string);
+			}
+			if (list.get(listSize - 1).length() == 0) {
+				AnnotatedWordListCreator.getInstance().setTotalSentenceSize(
+						listSize - 1);
+			} else {
+				AnnotatedWordListCreator.getInstance().setTotalSentenceSize(
+						listSize);
+			}
+		}
+
+		out.close();
+	}
 }

@@ -6,7 +6,7 @@ import tr.edu.hacettepe.cs.minio.MinioReader;
 import KeywordExtraction.NamedEntityTurkish.Word;
 import KeywordExtraction.NamedEntityTurkish.enums.WordType;
 
-public class RuleCountryName extends Rule{
+public class RuleCountryName extends Rule {
 	ArrayList<String> countries = new ArrayList<String>();
 	ArrayList<String> countryWords = new ArrayList<String>();
 
@@ -21,7 +21,7 @@ public class RuleCountryName extends Rule{
 		while (fileReader.inputAvailable()) {
 			String country = fileReader.readLine();
 			countries.add(country);
-			//System.out.println(country);
+			// System.out.println(country);
 		}
 
 		fileReader.close();
@@ -35,11 +35,13 @@ public class RuleCountryName extends Rule{
 		fileReader.close();
 	}
 
-	public ArrayList<Word> containsCountryName(ArrayList<Word> wordsList, int sentenceNumber) {
+	public ArrayList<Word> containsCountryName(ArrayList<Word> wordsList,
+			int sentenceNumber) {
 		this.wordsList = wordsList;
-		
-		findEntitiesInDictionary(wordsList, countries, WordType.COUNTRY, sentenceNumber);
-		
+
+		findEntitiesInDictionary(wordsList, countries, WordType.COUNTRY,
+				sentenceNumber);
+
 		for (int i = 0; i < wordsList.size(); i++) {
 			wordsList.get(i).cleareContent();
 			clearedContent = wordsList.get(i).getClearedContent();
@@ -50,27 +52,33 @@ public class RuleCountryName extends Rule{
 
 			for (String countryWord : countryWords) {
 				if (clearedContent.contains(countryWord)) {
-					//System.out.println("----" + countryWord);
+					// System.out.println("----" + countryWord);
 					countryWordFound = true;
 				}
 			}
 
 			if (countryWordFound) {
-				//System.out.println("country word found");
+				// System.out.println("country word found");
 				try {
 					int k = 1;
-					while ((wordsList.get(i - k).getType()).equals(WordType.POSSIBLE)
+					while ((wordsList.get(i - k).getType())
+							.equals(WordType.POSSIBLE)
 							|| (wordsList.get(i - k).getType())
 									.equals(WordType.CONTINENT)
 							|| (wordsList.get(i - k).getType())
 									.equals(WordType.COUNTRY)) {
-						//System.out.println("country word found mal herhalde bunu yazan: " + k);
+						// System.out.println("country word found mal herhalde bunu yazan: "
+						// + k);
 						wordsList.get(i).setType(WordType.COUNTRY);
-						if (wordsList.get(i - k).getContent().substring(
-								wordsList.get(i - k).getContent().length() - 2,
-								wordsList.get(i - k).getContent().length() - 1)
-								.equals(",")) {
-							//System.out.println("bu da neyse: " + k);
+						if (wordsList
+								.get(i - k)
+								.getContent()
+								.substring(
+										wordsList.get(i - k).getContent()
+												.length() - 2,
+										wordsList.get(i - k).getContent()
+												.length() - 1).equals(",")) {
+							// System.out.println("bu da neyse: " + k);
 							wordsList.get(i - k).setType(WordType.COUNTRY);
 							break;
 						}
@@ -95,34 +103,52 @@ public class RuleCountryName extends Rule{
 	void findEntitiesInDictionary(ArrayList<Word> wordsList,
 			ArrayList<String> entities, WordType entityType, int sentenceNumber) {
 		String sentence = "";
-		for (int i = 0; i < wordsList.size(); i++){
-			wordsList.get(i).cleareContent(); 
+		for (int i = 0; i < wordsList.size(); i++) {
+			wordsList.get(i).cleareContent();
 			sentence = sentence + " " + wordsList.get(i).getClearedContent();
 		}
-		
-		for(int i=0; i< entities.size(); i++){
-//			if (sentence.contains(entities.get(i))) {
-//				Word word = new Word();
-//				word.setClearedContent(entities.get(i));
-//				word.setContent(entities.get(i));
-//				word.setType(entityType);
-//				word.setSentenceNumber(sentenceNumber);
-//				annotatedWordListCreator.addAnnotatedWord(word);
-//				//word listesinde tek tek bulunan bu ülke isimlerinin tipini set et
-//			}	
-			
+
+		for (int i = 0; i < entities.size(); i++) {
+			// if (sentence.contains(entities.get(i))) {
+			// Word word = new Word();
+			// word.setClearedContent(entities.get(i));
+			// word.setContent(entities.get(i));
+			// word.setType(entityType);
+			// word.setSentenceNumber(sentenceNumber);
+			// annotatedWordListCreator.addAnnotatedWord(word);
+			// //word listesinde tek tek bulunan bu ülke isimlerinin tipini set
+			// et
+			// }
+
 			int indexInSentence = sentence.indexOf(entities.get(i));
+			int lastIndexInSentence = indexInSentence
+					+ entities.get(i).length();
 			while (indexInSentence >= 0) {
-				Word word = new Word();
-				word.setClearedContent(entities.get(i));
-				word.setContent(entities.get(i));
-				word.setType(entityType);
-				word.setSentenceNumber(sentenceNumber);
-				annotatedWordListCreator.addAnnotatedWord(word);
-			    indexInSentence = sentence.indexOf(entities.get(i), indexInSentence + 1);
+				char ch;
+				if (lastIndexInSentence < sentence.length()) {
+
+					ch = sentence.charAt(lastIndexInSentence);
+				}
+				else{
+					ch = '.';
+				}
+					
+				if (!((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'))) {
+					Word word = new Word();
+					word.setClearedContent(entities.get(i));
+					word.setContent(entities.get(i));
+					word.setType(entityType);
+					word.setSentenceNumber(sentenceNumber);
+					annotatedWordListCreator.addAnnotatedWord(word);
+				}
+
+				indexInSentence = sentence.indexOf(entities.get(i),
+						indexInSentence + 1);
+				lastIndexInSentence = sentence.lastIndexOf(entities.get(i),
+						indexInSentence + 1);
 			}
 		}
-		
+
 	}
 
 }
