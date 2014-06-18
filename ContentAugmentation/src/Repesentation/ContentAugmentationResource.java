@@ -41,7 +41,9 @@ public class ContentAugmentationResource {
 		String info;
 		for (Word word : annotatedWords) {
 			if(!entityInfoMap.containsKey(word.getClearedContent())){
-				info = wikiParser.getShortDefinition(word.getClearedContent());
+				wikiParser.downloadWikiPage(word.getClearedContent());
+				wikiParser.getRawInfoBox();
+				info = wikiParser.getShortDefinition();
 				entityInfoMap.put(word.getClearedContent(), info);
 			}
 		}
@@ -58,6 +60,10 @@ public class ContentAugmentationResource {
 	
 	public String getEntityInfo(String entity){
 		return entityInfoMap.get(entity);
+	}
+	
+	public void setQueryTextToWikiParser(String queryText){
+		wikiParser.setQueryDocument(queryText);
 	}
 	
 	

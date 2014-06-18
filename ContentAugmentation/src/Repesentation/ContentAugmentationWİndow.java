@@ -76,7 +76,7 @@ public class ContentAugmentationWİndow {
 		entityInfoArea = new Text(shell, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL);
 		entityInfoArea.setBounds(604, 44, 230, 230);
 		
-		final List list = new List(shell, SWT.BORDER | SWT.V_SCROLL);
+		final List list = new List(shell, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 		list.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
@@ -93,6 +93,7 @@ public class ContentAugmentationWİndow {
 			public void widgetSelected(SelectionEvent arg0) {
 				String inputText = styledText.getText();
 				try {
+					contentAugmentationResource.setQueryTextToWikiParser(inputText);
 					contentAugmentationResource.createEntityInfoMap(inputText);
 					ArrayList<String> wordList = contentAugmentationResource.getEntityList();
 					for (String wordContent : wordList) {
@@ -139,6 +140,7 @@ public class ContentAugmentationWİndow {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				list.removeAll();
+				entityInfoArea.setText("");
 			}
 		});
 		btnClearEntities.setBounds(431, 541, 101, 29);

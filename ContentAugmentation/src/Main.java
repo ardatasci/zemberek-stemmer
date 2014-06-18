@@ -1,8 +1,10 @@
+import java.util.ArrayList;
 import java.util.Vector;
 
 import net.sourceforge.jwbf.core.contentRep.Article;
 import net.sourceforge.jwbf.mediawiki.bots.MediaWikiBot;
 
+import Disambiguation.DocumentParser;
 import KeywordAugmentation.Freebase.MQLAPI.FreebaseTVProgramRequest;
 import KeywordAugmentation.Freebase.SearchAPI.FreebaseProgramSearchRequest;
 import KeywordAugmentation.Wikipedia.WikiParser;
@@ -83,11 +85,33 @@ public class Main {
 		// //ner denemeleri
 		ContentAugmentationWİndow myWindow = new ContentAugmentationWİndow();
 		myWindow.main();
+		
+//		ArrayList<String> disambiguationWikiPageDefinitions = new ArrayList<>();
+//		
+//		String s1 = "Manisa'nın Soma ilçesindeki maden faciasında hayatını kaybeden 282 işçiden 28 yaşındaki Mithat Özdirik'in cenazesi, memleketi Fatih'de toprağa verildi.";
+//		disambiguationWikiPageDefinitions.add(s1);
+//		
+//		String s2 = "Fatih, Tarihi yarımada (Suriçi) denen İstanbul şehrinin kurulduğu ve geliştiği bölgenin tamamını kaplayan ve İstanbul'un merkezi sayılan ilçe. Güneybatıdan Zeytinburnu, kuzeybatıdan Eyüp ilçeleri ile kuzeyden Haliç, doğudan İstanbul Boğazı ve güneyden Marmara Denizi ile çevrilidir. Fatih İlçesi, 1928'den 2008'e kadar Eminönü'yle beraber Tarihi Yarımadadaki iki ilçeden biri olmuştur. 2008'de Eminönü İlçesi'nin varlığının ortadan kaldırıp Fatih İlçesi'ne katılmasından beri tüm Tarihi yarımada üzerindeki tek ilçe haline gelmiştir. Kırsal yerleşimi olmayan ve 15.62 km²'lik (1562 hektar) bir alanı kaplayan Fatih İlçesi 57 mahalleden oluşmaktadır.";
+//		disambiguationWikiPageDefinitions.add(s2);
+//		
+//		String s3 = "Fatih, Osmanlı Padişahı II. Mehmed'in hayatını konu alan, 2013 yapımı Türk dizisi. Reyting azlığı sebebiyle Kanal D yönetimince saat 22:00'a alınması diziyi kanalın finans desteğinden mahrum bırakmıştır. Yapımcı diziyi bitirme kararı almış, 4 Kasım 2013 tarihinde yayınlanan 5. bölümüyle dizi final yapmıştır.";
+//		disambiguationWikiPageDefinitions.add(s3);
+//		
+//		String s4 = "Fatih, Ankara'nın Sincan ilçesine bağlı, Ankara - Ayaş Yolu üzerinde bulunan bir semttir. Avrupa'nın en büyük parkı Harikalar Diyarı bu semtte bulunmaktadır. Semtte 6 tane lise, 2 tane metro istasyonu ve bir adet büyük hastane bulunmaktadır. Mahallede ağırlıklı olarak memur ve işçi kesimi ikamet eder.";
+//		disambiguationWikiPageDefinitions.add(s4);
+//		
+//		DocumentParser documentParser = new DocumentParser();
+//		documentParser.parseFiles(disambiguationWikiPageDefinitions);
+//		documentParser.tfIdfCalculator();
+//		int index = documentParser.getMostSimilarIndex();
+//		System.out.println(disambiguationWikiPageDefinitions.get(index));
+		
 //		WikiParser wikiParser = new WikiParser();
 //		wikiParser.initWikiParser();
-//		String page = wikiParser.getWikiPage("Şili");
-//		System.out.println(wikiParser.getRawInfoBox());
-//		System.out.println(wikiParser.getShortDefinition());
+//		String page = wikiParser.downloadWikiPage("Fatih, Pendik");
+//		wikiParser.getRawInfoBox();
+		//System.out.println(wikiParser.getRawInfoBox());
+		//System.out.println(page);
 
 
 		//System.out.println(page);
