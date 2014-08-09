@@ -11,7 +11,7 @@ public class Word {
 	
 	String affix = "";
 	//String type = null;
-	WordType type = WordType.NOTHING;
+	WordType type = null;
 	WordType subType = null;
 	private String wikiText = "";
 	
