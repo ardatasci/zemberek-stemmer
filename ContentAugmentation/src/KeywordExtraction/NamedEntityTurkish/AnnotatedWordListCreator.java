@@ -8,6 +8,7 @@ public class AnnotatedWordListCreator {
 
 	private ArrayList<Word> AnnotatedWordList = new ArrayList<Word>();
 	private int totalSentenceSize = 0;
+	private long totalWordCount = 0;
 
 	private AnnotatedWordListCreator() {
 		// Exists only to defeat instantiation.
@@ -34,6 +35,14 @@ public class AnnotatedWordListCreator {
 
 	public void setTotalSentenceSize(int totalSentenceSize) {
 		this.totalSentenceSize = totalSentenceSize;
+	}
+
+	public long getTotalWordCount() {
+		return totalWordCount;
+	}
+
+	public void setTotalWordCount(long totalWordCount) {
+		this.totalWordCount = totalWordCount;
 	}
 	
 

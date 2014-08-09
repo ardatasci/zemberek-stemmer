@@ -39,7 +39,7 @@ public class RuleCountryName extends Rule {
 			int sentenceNumber) {
 		this.wordsList = wordsList;
 
-		findEntitiesInDictionary(wordsList, countries, WordType.COUNTRY,
+		findEntitiesInDictionary(wordsList, countries, WordType.LOCATION,
 				sentenceNumber);
 
 		for (int i = 0; i < wordsList.size(); i++) {

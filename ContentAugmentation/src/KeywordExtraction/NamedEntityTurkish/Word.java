@@ -11,7 +11,7 @@ public class Word {
 	
 	String affix = "";
 	//String type = null;
-	WordType type = null;
+	WordType type = WordType.NOTHING;
 	WordType subType = null;
 	private String wikiText = "";
 	
@@ -161,6 +161,10 @@ public class Word {
 	}
 	public void setWikiText(String wikiText) {
 		this.wikiText = wikiText;
+	}
+	
+	public void writeToConsole(){
+		System.out.println(clearedContent + "--- " + type);
 	}
 
 }

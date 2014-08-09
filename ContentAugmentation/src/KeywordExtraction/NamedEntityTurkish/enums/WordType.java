@@ -3,7 +3,7 @@ package KeywordExtraction.NamedEntityTurkish.enums;
 public enum WordType {
 
 	ABBREVIATION("Abbreviation"), CITY("City"), CONTINENT("Continent"), COUNTRY(
-			"Counry"), DATE("Date"), LOCATION("Location"), MONETARY("Monetary"), NAME("Name"), ORGANIZATION(
+			"Counry"), DATE("Date"), LOCATION("Location"), MONETARY("Monetary"), NAME("Name"), NOTHING("Nothing"), ORGANIZATION(
 			"Organization"), PERCENTAGE("Percantage"), PERSON("Person"), POSSIBLE(
 			"Possible"), QUANTITY("Quantity"), TIME("Time");
 

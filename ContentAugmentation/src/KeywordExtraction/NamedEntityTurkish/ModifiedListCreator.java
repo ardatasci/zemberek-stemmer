@@ -22,6 +22,7 @@ public class ModifiedListCreator {
 	int[] wantedEntities;
 	String outputType = "";
 	int sentenceNumber = 0;
+	long totalWordCount = 0;
 
 	public ModifiedListCreator() {
 
@@ -50,6 +51,7 @@ public class ModifiedListCreator {
 				// System.out.println(word.getClearedContent());
 				// System.out.println(word.getType());
 				wordsList.add(word);
+				totalWordCount++;
 
 			}
 			modifiedWordsList = entityFinder.findEntities(wantedEntities,
@@ -60,12 +62,12 @@ public class ModifiedListCreator {
 			wordsList.clear();
 		}
 		in.close();
-
+		AnnotatedWordListCreator.getInstance().setTotalWordCount(totalWordCount);
 		extractNamedEntityWords(allWordList);
 		try {
 			utilFunctions.writeWordsToFile("AnnotatedWords.txt", namedEntityWordList);
 			utilFunctions.writeWordsToFile("AllWords.txt", allWordList);
-			utilFunctions.writeMyModifiedOutputToFile("MyModifiedOutput.txt", AnnotatedWordListCreator.getInstance().getAnnotatedWordList());
+			//utilFunctions.writeMyModifiedOutputToFile("MyModifiedOutput.txt", AnnotatedWordListCreator.getInstance().getAnnotatedWordList());
 			utilFunctions.writeWordsToFile("MyAnnotatedWords.txt", AnnotatedWordListCreator.getInstance().getAnnotatedWordList());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

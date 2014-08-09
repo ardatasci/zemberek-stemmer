@@ -22,7 +22,7 @@ public class ContentAugmentationResource {
 		wikiParser.initWikiParser();
 	}
 	
-	private ArrayList<Word> getAnnotatedWords(String text) throws IOException{
+	public ArrayList<Word> getAnnotatedWords(String text) throws IOException{
 		AnnotatedWordListCreator.getInstance().getAnnotatedWordList().clear();
 		 SentenceCreator sentenceCreater = new SentenceCreator();
 		 //sentenceCreater.createSentenceBySentenceText("input.txt","sentenceBySentence.txt");
@@ -42,8 +42,9 @@ public class ContentAugmentationResource {
 		for (Word word : annotatedWords) {
 			if(!entityInfoMap.containsKey(word.getClearedContent())){
 				wikiParser.downloadWikiPage(word.getClearedContent());
-				wikiParser.getRawInfoBox();
+				//System.out.println(wikiParser.getRawInfoBox());
 				info = wikiParser.getShortDefinition();
+				
 				entityInfoMap.put(word.getClearedContent(), info);
 			}
 		}
@@ -65,6 +66,15 @@ public class ContentAugmentationResource {
 	public void setQueryTextToWikiParser(String queryText){
 		wikiParser.setQueryDocument(queryText);
 	}
+	
+	public long getTotalWordCount(){
+		return AnnotatedWordListCreator.getInstance().getTotalWordCount();
+	}
+	
+	public HashMap<String, String> getEntityInfoMap(){
+		return entityInfoMap;
+	}
+	
 	
 	
 	

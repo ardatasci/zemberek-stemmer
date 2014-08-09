@@ -28,7 +28,7 @@ public class RuleCityName extends Rule {
 		this.wordsList = wordsList;
 		// XXX -- ici doldurulacak
 		
-		findEntitiesInDictionary(wordsList, cities, WordType.CITY, sentenceNumber);
+		findEntitiesInDictionary(wordsList, cities, WordType.LOCATION, sentenceNumber);
 
 		for (int i = 0; i < wordsList.size(); i++) {
 			wordsList.get(i).cleareContent();
